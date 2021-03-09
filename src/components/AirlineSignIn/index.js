@@ -1,9 +1,16 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+//React Imports
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+
+//Actions
 import { airlineSignIn } from "../../store/actions/authActions";
-import { useState } from "react";
+
+//Components
+import { useForm } from "react-hook-form";
+
+//Styles
+import { StyledForm } from "./styles";
 
 export default function PassengerSignin() {
   const { register, handleSubmit } = useForm();
@@ -17,17 +24,11 @@ export default function PassengerSignin() {
   };
 
   return (
-    <div
-      className="container"
-      style={{
-        marginTop: "10%",
-
-        width: "20%",
-      }}
-    >
+    <StyledForm className="container">
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <h1>Sign In</h1>
         <br />
+
         <label className="form-label">Username</label>
         <input
           type="text"
@@ -35,14 +36,15 @@ export default function PassengerSignin() {
           className="form-control mb-2"
           ref={register({ required: true })}
         />
-        <label className="form-label">Password</label>
 
+        <label className="form-label">Password</label>
         <input
           type={password ? "password" : "text"}
           name="password"
           className="form-control mb-2"
           ref={register({ required: true })}
         />
+
         <div className="mb-3 form-check">
           <input
             type="checkbox"
@@ -59,6 +61,6 @@ export default function PassengerSignin() {
           value="Sign In"
         />
       </form>
-    </div>
+    </StyledForm>
   );
 }

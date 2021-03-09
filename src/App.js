@@ -4,8 +4,8 @@ import AirlineSignIn from "./components/AirlineSignIn";
 import Signup from "./components/SignUp";
 
 function App() {
-  return <Signup />;
-  // return <PassengerSignIn />;
+  // return <Signup />;
+  return <PassengerSignIn />;
   // return <AirlineSignIn />;
 }
 

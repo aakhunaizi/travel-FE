@@ -1,13 +1,20 @@
-import React from "react";
-import { useForm, Controller } from "react-hook-form";
+//React Imports
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+
+//Actions
 import { signup } from "../../store/actions/authActions";
-import { useState } from "react";
-import { FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
+
+//Components
 // import { yupResolver } from "@hookform/resolvers/yup";
 // import * as yup from "yup";
+import { useForm, Controller } from "react-hook-form";
 import ReactDatePicker from "react-datepicker";
+import { FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
+
+//Styles
+import { StyledForm, StyledValidationText } from "./styles";
 import "react-datepicker/dist/react-datepicker.css";
 
 // const schema = yup.object().shape({
@@ -36,12 +43,7 @@ export default function Signup() {
   };
 
   return (
-    <div
-      className="container"
-      style={{
-        width: "20%",
-      }}
-    >
+    <StyledForm className="container">
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <h1>Sign Up</h1>
         <br />
@@ -50,11 +52,17 @@ export default function Signup() {
           type="text"
           name="email"
           className="form-control mb-2"
-          ref={register({ required: true })}
+          ref={register({
+            required: "Email is required",
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "Invalid email address",
+            },
+          })}
         />
-        <div style={{ color: "red" }}>
-          {errors.email && "Email is required"}
-        </div>
+        <StyledValidationText>
+          {errors.email && <span>{errors.email.message}</span>}
+        </StyledValidationText>
         <br />
         <label className="form-label">First Name</label>
         <input
@@ -63,9 +71,9 @@ export default function Signup() {
           className="form-control mb-2"
           ref={register({ required: true })}
         />
-        <div style={{ color: "red" }}>
+        <StyledValidationText>
           {errors.firstName && "First Name is required"}
-        </div>
+        </StyledValidationText>
         <br />
         <label className="form-label">Last Name</label>
         <input
@@ -74,9 +82,9 @@ export default function Signup() {
           className="form-control mb-2"
           ref={register({ required: true })}
         />
-        <div style={{ color: "red" }}>
+        <StyledValidationText>
           {errors.lastName && "Last Name is required"}
-        </div>
+        </StyledValidationText>
         <br />
         <label>Date of Birth</label>
         <br />
@@ -93,9 +101,9 @@ export default function Signup() {
             />
           )}
         />
-        <div style={{ color: "red" }}>
+        <StyledValidationText>
           {errors.value && "Date of Birth is required"}
-        </div>
+        </StyledValidationText>
         <label>Gender</label>
         <Controller
           as={
@@ -114,9 +122,9 @@ export default function Signup() {
           className="form-control mb-2"
           ref={register({ required: true })}
         />
-        <div style={{ color: "red" }}>
+        <StyledValidationText>
           {errors.phoneNumber && "Phone Number is required"}
-        </div>
+        </StyledValidationText>
         <br />
         <label className="form-label">Username</label>
         <input
@@ -125,9 +133,9 @@ export default function Signup() {
           className="form-control mb-2"
           ref={register({ required: true })}
         />
-        <div style={{ color: "red" }}>
+        <StyledValidationText>
           {errors.username && "Username is required"}
-        </div>
+        </StyledValidationText>
         <br />
         <label className="form-label">Password</label>
         <input
@@ -143,9 +151,9 @@ export default function Signup() {
             },
           })}
         />
-        <div style={{ color: "red" }}>
+        <StyledValidationText>
           {errors.password && <span>{errors.password.message}</span>}
-        </div>
+        </StyledValidationText>
         <div className="mb-3 form-check">
           <input
             type="checkbox"
@@ -161,6 +169,6 @@ export default function Signup() {
           value="Sign Up"
         />
       </form>
-    </div>
+    </StyledForm>
   );
 }
