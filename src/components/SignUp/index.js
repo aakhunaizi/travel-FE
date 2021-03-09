@@ -135,13 +135,16 @@ export default function Signup() {
           name="password"
           className="form-control mb-2"
           ref={register({
-            required: true,
-            pattern: "/^(?=.[a-z])(?=.[A-Z])(?=.*d)[a-zA-Zd]{8,}$/",
+            required: "Password is required",
+            pattern: {
+              value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+              message:
+                "The password must contain a minimum of 8 characters, an uppercase letter, a lowercase letter, and a number.",
+            },
           })}
         />
         <div style={{ color: "red" }}>
-          {errors.password &&
-            " Password must contain a minimum of eight characters, at least one uppercase letter, one lowercase letter and one number"}
+          {errors.password && <span>{errors.password.message}</span>}
         </div>
         <div className="mb-3 form-check">
           <input
