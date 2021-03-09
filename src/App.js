@@ -1,12 +1,16 @@
-import "./App.css";
-import PassengerSignIn from "./components/PassengerSignIn";
-import AirlineSignIn from "./components/AirlineSignIn";
-import Signup from "./components/SignUp";
+//Components
+import { Helmet } from "react-helmet";
+import Routes from "./components/Routes";
 
 function App() {
-  // return <Signup />;
-  return <PassengerSignIn />;
-  // return <AirlineSignIn />;
+  return (
+    <>
+      <Helmet>
+        <title>Travel Agency</title>
+      </Helmet>
+      <Routes />
+    </>
+  );
 }
 
 export default App;
