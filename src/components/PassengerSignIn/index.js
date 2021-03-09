@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 //Styles
 import { StyledForm } from "./styles";
 
-export default function PassengerSignin() {
+export default function PassengerSignIn() {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const [password, setPassword] = useState(true);
