@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import Signup from "../SignUp";
 import PassengerSignIn from "../UserSignIn";
 import AirlineSignIn from "../AirlineSignIn";
+import Home from "../Home";
 
 const Routes = () => {
   return (
@@ -20,7 +21,7 @@ const Routes = () => {
         <PassengerSignIn />
       </Route>
       <Route path="/">
-        <div>Pretend this is a home page</div>
+        <Home />
       </Route>
     </Switch>
   );

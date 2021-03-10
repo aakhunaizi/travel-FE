@@ -1,7 +1,11 @@
+//Imports
 import instance from "./instance";
 import decode from "jwt-decode";
+
+//Action Types
 import * as types from "../actions/types";
 
+//Actions
 const setUser = (token) => {
   localStorage.setItem("token", token);
   instance.defaults.headers.common.Authorization = `Bearer ${token}`;
