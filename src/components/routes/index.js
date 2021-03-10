@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 //Components
 import Signup from "../SignUp";
-import PassengerSignIn from "../PassengerSignIn";
+import PassengerSignIn from "../UserSignIn";
 import AirlineSignIn from "../AirlineSignIn";
 
 const Routes = () => {

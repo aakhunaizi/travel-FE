@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 //Actions
-import { passengerSignIn } from "../../store/actions/authActions";
+import { userSignIn } from "../../store/actions/authActions";
 
 //Components
 import { useForm } from "react-hook-form";
@@ -21,7 +21,7 @@ export default function PassengerSignIn() {
   const history = useHistory();
 
   const onSubmit = (data) => {
-    dispatch(passengerSignIn(data, history));
+    dispatch(userSignIn(data, history));
   };
 
   return (

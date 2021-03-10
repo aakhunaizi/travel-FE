@@ -24,7 +24,7 @@ export const signup = (newUser, history) => {
   };
 };
 
-export const passengerSignIn = (user, history) => {
+export const userSignIn = (user, history) => {
   return async (dispatch) => {
     try {
       const res = await instance.post("/signin", user);
