@@ -6,7 +6,7 @@ import decode from "jwt-decode";
 import * as types from "../actions/types";
 
 //Actions
-const setUser = (token) => {
+const setUser = (token, profile) => {
   localStorage.setItem("token", token);
   instance.defaults.headers.common.Authorization = `Bearer ${token}`;
   return {
@@ -74,5 +74,17 @@ export const checkForToken = () => (dispatch) => {
       localStorage.removeItem("token");
       dispatch(signout());
     }
+  }
+};
+
+export const profile = () => async (dispatch) => {
+  try {
+    const res = await instance.get("/profile");
+    dispatch({
+      type: types.FETCH_PROFILE,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.error(error);
   }
 };
