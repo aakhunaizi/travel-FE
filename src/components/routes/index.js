@@ -1,12 +1,12 @@
 //React Imports
 import { Route, Switch } from "react-router";
-import { useSelector } from "react-redux";
 
 //Components
 import Signup from "../SignUp";
 import PassengerSignIn from "../UserSignIn";
 import AirlineSignIn from "../AirlineSignIn";
 import Home from "../Home";
+import UserProfile from "../UserProfile";
 
 const Routes = () => {
   return (
@@ -19,6 +19,9 @@ const Routes = () => {
       </Route>
       <Route path={"/signin"}>
         <PassengerSignIn />
+      </Route>
+      <Route path={"/profile"}>
+        <UserProfile />
       </Route>
       <Route path="/">
         <Home />
