@@ -1,27 +1,22 @@
 //React Imports
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 
 //Actions
 import { profile } from "../../store/actions/authActions";
 
 //Components
-import { useForm, Controller } from "react-hook-form";
-import ReactDatePicker from "react-datepicker";
+import { useForm } from "react-hook-form";
 
 //Styles
 import { StyledForm, StyledValidationText } from "./styles";
 import "react-datepicker/dist/react-datepicker.css";
-import { FaTemperatureHigh } from "react-icons/fa";
 
 export default function UpdateProfile() {
   const username = useSelector((state) => state.authReducer.user.username);
   const checkProfile = useSelector((state) => state.authReducer.profile);
-  checkProfile === null && dispatch(profile(username));
-  const { register, handleSubmit, errors, control } = useForm();
-
   const dispatch = useDispatch();
+  checkProfile === null && dispatch(profile(username));
+  const { register, handleSubmit, errors } = useForm();
 
   const submitAction = (data) => {
     console.log("Submitted", data); //Update action here
