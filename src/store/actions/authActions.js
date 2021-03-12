@@ -88,3 +88,10 @@ export const profile = () => async (dispatch) => {
     console.error(error);
   }
 };
+
+export const clearProfile = () => {
+  return {
+    type: types.FETCH_PROFILE,
+    payload: null,
+  };
+};
