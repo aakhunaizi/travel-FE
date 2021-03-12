@@ -6,9 +6,6 @@ import { useHistory } from "react-router-dom";
 //Actions
 import { signup } from "../../store/actions/authActions";
 
-//Components
-// import { yupResolver } from "@hookform/resolvers/yup";
-// import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
 import ReactDatePicker from "react-datepicker";
 import { FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
@@ -18,23 +15,12 @@ import { Helmet } from "react-helmet";
 import { StyledForm, StyledValidationText } from "./styles";
 import "react-datepicker/dist/react-datepicker.css";
 
-// const schema = yup.object().shape({
-//   email:,
-//   firstName:,
-//   lastName: ,
-//   phoneNumber:,
-//   username:,
-//   password:
-
-// });
-
 export default function Signup() {
   const { register, handleSubmit, errors, control } = useForm({
     defaultValues: {
       gender: "M",
       dateOfBirth: "",
     },
-    // resolver: yupResolver(schema),
   });
   const [password, setPassword] = useState(true);
   const dispatch = useDispatch();

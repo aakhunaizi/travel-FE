@@ -1,5 +1,6 @@
 //React Imports
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 
 //Components
 import { makeStyles } from "@material-ui/core/styles";
@@ -9,6 +10,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Helmet } from "react-helmet";
+import { Modal } from "react-bootstrap";
+import UpdateProfile from "../UpdateProfile";
 
 //Actions
 import { profile } from "../../store/actions/authActions";
@@ -38,6 +41,11 @@ const UserProfile = () => {
   checkProfile === null && dispatch(profile(username));
 
   const classes = useStyles();
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     checkProfile && (
@@ -78,7 +86,7 @@ const UserProfile = () => {
               color="textSecondary"
               gutterBottom
             >
-              Mobile Number
+              Phone Number
             </Typography>
             <Typography variant="h5" component="h2">
               {checkProfile.phoneNumber}
@@ -107,11 +115,19 @@ const UserProfile = () => {
             </Typography>
           </CardContent>
           <CardActions style={{ float: "right" }}>
-            <Button variant="outlined" color="primary">
+            <Button variant="outlined" color="primary" onClick={handleShow}>
               Edit
             </Button>
           </CardActions>
         </Card>
+        <Modal show={show} onHide={handleClose} style={{ marginTop: "5%" }}>
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Profile</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <UpdateProfile />
+          </Modal.Body>
+        </Modal>
       </>
     )
   );
