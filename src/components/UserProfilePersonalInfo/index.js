@@ -55,7 +55,7 @@ const UserProfilePersonalInfo = () => {
         </Helmet>
         <Card
           className="container"
-          style={{ width: "50%", marginTop: "2%" }}
+          style={{ width: "60%", marginTop: "2%" }}
           variant="outlined"
         >
           <CardContent>
