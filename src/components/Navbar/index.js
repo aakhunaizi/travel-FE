@@ -13,7 +13,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
 //Actions
-import { profile, signout } from "../../store/actions/authActions";
+import { signout, clearProfile } from "../../store/actions/authActions";
 
 //Styling
 import { makeStyles } from "@material-ui/core/styles";
@@ -31,14 +31,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Navbar = (props) => {
+const Navbar = () => {
   const user = useSelector((state) => state.authReducer.user);
-  const username = useSelector((state) => state.authReducer.user.username);
   const dispatch = useDispatch();
   const history = useHistory();
 
   const handleSignout = () => {
     dispatch(signout());
+    dispatch(clearProfile());
     history.replace("/");
   };
 
@@ -50,10 +50,6 @@ const Navbar = (props) => {
 
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
-  const handleProfile = () => {
-    dispatch(profile(username));
   };
 
   const classes = useStyles();
@@ -89,7 +85,7 @@ const Navbar = (props) => {
                     style={{ color: "black", textDecoration: "none" }}
                     to="/profile"
                   >
-                    <MenuItem onClick={handleProfile}>Profile</MenuItem>
+                    <MenuItem onClick={handleClose}>Profile</MenuItem>
                   </Link>
                   <MenuItem
                     style={{ color: "black", textDecoration: "none" }}
