@@ -1,5 +1,5 @@
 //Components
-import { Card } from "@material-ui/core";
+import { Button, Card, CardActions } from "@material-ui/core";
 import { useState } from "react";
 import { FaPlaneArrival, FaPlaneDeparture } from "react-icons/fa";
 import { useSelector } from "react-redux";
@@ -197,7 +197,11 @@ const Home = () => {
             </>
           )}
         </div>
-        <br />
+        <CardActions style={{ float: "right" }}>
+          <Button variant="outlined" color="primary">
+            Search
+          </Button>
+        </CardActions>
       </Card>
     </StyledSearch>
   );
