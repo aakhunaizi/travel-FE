@@ -24,9 +24,14 @@ const Routes = () => {
       </Route>
       <Route
         path={"/profile"}
-        component={() => (user === null ? <UserSignIn /> : <UserProfile />)}
+        component={() =>
+          user === null ? (
+            <UserSignIn />
+          ) : (
+            user.role === "user" && <UserProfile />
+          )
+        }
       />
-
       <Route path="/">
         <Home />
       </Route>

@@ -81,12 +81,24 @@ const Navbar = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <Link
-                    style={{ color: "black", textDecoration: "none" }}
-                    to="/profile"
-                  >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  </Link>
+                  {user.role === "user" ? (
+                    <Link
+                      style={{ color: "black", textDecoration: "none" }}
+                      to="/profile"
+                    >
+                      <MenuItem onClick={handleClose}>Profile</MenuItem>
+                    </Link>
+                  ) : (
+                    user.role === "airline" && (
+                      <Link
+                        style={{ color: "black", textDecoration: "none" }}
+                        to="/flights"
+                      >
+                        <MenuItem onClick={handleClose}>Flights</MenuItem>
+                      </Link>
+                    )
+                  )}
+
                   <MenuItem
                     style={{ color: "black", textDecoration: "none" }}
                     onClick={handleSignout}
