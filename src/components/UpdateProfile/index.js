@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from "react-redux";
 
 //Actions
-import { profile } from "../../store/actions/authActions";
+import { profile, updateProfile } from "../../store/actions/authActions";
 
 //Components
 import { useForm } from "react-hook-form";
@@ -19,11 +19,11 @@ export default function UpdateProfile() {
   const { register, handleSubmit, errors } = useForm();
 
   const submitAction = (data) => {
-    console.log("Submitted", data); //Update action here
+    dispatch(updateProfile(data));
     //Buffer to execute action before reloading page
-    setTimeout(() => {
-      window.location.reload();
-    }, 500);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 500);
   };
 
   return (
