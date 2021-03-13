@@ -17,6 +17,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         profile: action.payload,
       };
+    case types.UPDATE_PROFILE:
+      return {
+        ...state,
+        profile: action.payload.updatedProfile,
+      };
     default:
       return state;
   }
