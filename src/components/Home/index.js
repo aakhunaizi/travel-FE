@@ -1,7 +1,10 @@
 //Components
+import { Card } from "@material-ui/core";
 import { useState } from "react";
+import { FaPlaneArrival, FaPlaneDeparture } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import Select from "react-select";
+import { StyledCardHeader, StyledSearch } from "./styles";
 
 const Home = () => {
   const [departureFlight, setDepartureFlight] = useState({ flight: "" });
@@ -121,73 +124,82 @@ const Home = () => {
   };
 
   return (
-    <div
-      className="container"
-      style={{ width: "30%", border: "2px solid black", marginTop: "15%" }}
-    >
-      <Select
-        className="react-select-container"
-        placeholder="From"
-        isSearchable="true"
-        isClearable="true"
-        name="departureAirport"
-        options={airportDepartureList}
-        onChange={handleChangeDeparture}
-      />
-
-      <Select
-        className="react-select-container"
-        placeholder="To"
-        isSearchable="true"
-        isClearable="true"
-        isDisabled={departureFlight.flight ? false : true}
-        name="arrivalAirport"
-        options={airportArrivalList}
-        onChange={handleChangeArrival}
-      />
-      <Select
-        className="react-select-container"
-        name="flightType"
-        defaultValue={_flightType[0]}
-        options={_flightType}
-        onChange={handleChangeFlightType}
-      />
-      <Select
-        className="react-select-container"
-        name="seatType"
-        defaultValue={_seatType[0]}
-        options={_seatType}
-        onChange={handleChangeSeatType}
-      />
-      <Select
-        className="react-select-container"
-        placeholder="Number of Passengers"
-        isClearable="true"
-        name="numberOfSeats"
-        options={_numberOfSeats}
-        onChange={handleChangeNumberOfSeats}
-      />
-      <label>Departure Date</label>
-      <input
-        className="form-control"
-        value={departureFlightDate.departuredate}
-        type="date"
-        name="departuredate"
-        onChange={handleChangeDepartureDate}
-      />
-      {flightType === "roundtrip" && (
-        <>
-          <label>Arrival Date</label>
-          <input
-            className="form-control"
-            value={arrivalFlightDate.arrivaldate}
-            type="date"
-            name="arrivaldate"
-            onChange={handleChangeArrivalDate}
+    <StyledSearch className="container">
+      <br />
+      <Card variant="outlined">
+        <StyledCardHeader title="Search for your next destination" />
+        <div className="row">
+          <Select
+            className="col-md-3"
+            name="flightType"
+            defaultValue={_flightType[0]}
+            options={_flightType}
+            onChange={handleChangeFlightType}
           />
-        </>
-      )}
-    </div>
+          <Select
+            className="col-md-3"
+            defaultValue={_numberOfSeats[0]}
+            isClearable="true"
+            name="numberOfSeats"
+            options={_numberOfSeats}
+            onChange={handleChangeNumberOfSeats}
+          />
+          <Select
+            className="col-md-3"
+            name="seatType"
+            defaultValue={_seatType[0]}
+            options={_seatType}
+            onChange={handleChangeSeatType}
+          />
+        </div>
+        <br />
+        <div className="row">
+          <Select
+            className="col-md-6"
+            placeholder="From"
+            isSearchable="true"
+            isClearable="true"
+            name="departureAirport"
+            options={airportDepartureList}
+            onChange={handleChangeDeparture}
+          />
+          <Select
+            className="col-md-6"
+            placeholder="To"
+            isSearchable="true"
+            isClearable="true"
+            isDisabled={departureFlight.flight ? false : true}
+            name="arrivalAirport"
+            options={airportArrivalList}
+            onChange={handleChangeArrival}
+          />
+        </div>
+        <br />
+        <div className="row">
+          <FaPlaneDeparture style={{ margin: "2%" }} />
+          <input
+            className="col-md-4"
+            value={departureFlightDate.departuredate}
+            type="date"
+            name="departuredate"
+            onChange={handleChangeDepartureDate}
+          />
+          {flightType === "roundtrip" && (
+            <>
+              <FaPlaneArrival style={{ margin: "2%" }} />
+              <input
+                className="col-md-4 "
+                value={arrivalFlightDate.arrivaldate}
+                type="date"
+                name="arrivaldate"
+                onChange={handleChangeArrivalDate}
+              />
+            </>
+          )}
+        </div>
+        <br />
+      </Card>
+    </StyledSearch>
   );
 };
 
