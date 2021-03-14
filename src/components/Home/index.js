@@ -6,27 +6,18 @@ import { useSelector, useDispatch } from "react-redux";
 import Select from "react-select";
 import { StyledCard, StyledCardHeader, StyledSearch } from "./styles";
 import { fetchFlights } from "../../store/actions/flightActions";
+import ReactDatePicker from "react-datepicker";
 const Home = () => {
   const dispatch = useDispatch();
-  // const [flight, setFlight] = useState({
-  //   departureAirport: null,
-  //   arrivalAirport: "",
-  //   departureDate: "",
-  //   returnDate: null,
-  //   flightType: "oneway",
-  //   passengers: 0,
-  // });
-  const [departureFlight, setDepartureFlight] = useState({ flight: "" });
-  const [arrivalFlight, setArrivalFlight] = useState({ flight: "" });
-  const [departureFlightDate, setDepartureFlightDate] = useState({
-    departuredate: "",
+  const [flight, setFlight] = useState({
+    departureAirport: null,
+    arrivalAirport: "",
+    departureDate: "",
+    arrivalDate: null,
+    flightType: "oneway",
+    seatType: "economy",
+    passengers: 1,
   });
-  const [arrivalFlightDate, setArrivalFlightDate] = useState({
-    arrivaldate: "",
-  });
-  const [flightType, setFlightType] = useState("oneway");
-  const [seatType, setSeatType] = useState("economy");
-  const [numberOfSeats, setNumberOfSeats] = useState(1);
 
   const _flightType = [
     {
@@ -50,7 +41,7 @@ const Home = () => {
     },
   ];
 
-  const _numberOfSeats = [
+  const _passengers = [
     {
       value: 1,
       label: "1",
@@ -91,51 +82,22 @@ const Home = () => {
 
   const airports = useSelector((state) => state.airportReducer.airports);
   const airportDepartureList = airports
-    .filter((airport) => airport.id !== arrivalFlight.flight)
+    .filter((airport) => airport.id !== flight.arrivalAirport)
     .map((airport) => ({
       value: airport.id,
       label: `${airport.name}, ${airport.location}`,
     }));
 
   const airportArrivalList = airports
-    .filter((airport) => airport.id !== departureFlight.flight)
+    .filter((airport) => airport.id !== flight.departureAirport)
     .map((airport) => ({
       value: airport.id,
       label: `${airport.name}, ${airport.location}`,
     }));
 
-  const handleChangeDeparture = (event) => {
-    if (event !== null) setDepartureFlight({ flight: event.value });
-  };
-
-  const handleChangeArrival = (event) => {
-    if (event !== null) setArrivalFlight({ flight: event.value });
-  };
-
-  const handleChangeDepartureDate = (event) => {
-    setDepartureFlightDate({ departuredate: event.target.value });
-  };
-
-  const handleChangeArrivalDate = (event) => {
-    setArrivalFlightDate({ arrivaldate: event.target.value });
-  };
-
-  const handleChangeFlightType = (event) => {
-    setFlightType(event.value);
-  };
-
-  const handleChangeSeatType = (event) => {
-    setSeatType(event.value);
-  };
-
-  const handleChangeNumberOfSeats = (event) => {
-    if (event !== null) setNumberOfSeats(event.value);
-  };
-
   const handleSearch = () => {
-    dispatch(
-      fetchFlights(departureFlight.flight, arrivalFlight.flight, numberOfSeats)
-    );
+    console.log(flight);
+    alert("Flight", flight);
   };
   return (
     <StyledSearch className="container">
@@ -147,66 +109,79 @@ const Home = () => {
             className="col-md-3"
             name="flightType"
             defaultValue={_flightType[0]}
+            value={flight.flightType}
             options={_flightType}
-            onChange={handleChangeFlightType}
+            onChange={(flightType) => {
+              setFlight({ ...flight, flightType });
+            }}
           />
           <Select
             className="col-md-3"
-            defaultValue={_numberOfSeats[0]}
+            defaultValue={_passengers[0]}
+            value={flight.passengers}
             isClearable="true"
-            name="numberOfSeats"
-            options={_numberOfSeats}
-            onChange={handleChangeNumberOfSeats}
+            name="passengers"
+            options={_passengers}
+            onChange={(passengers) => setFlight({ ...flight, passengers })}
           />
           <Select
             className="col-md-3"
             name="seatType"
             defaultValue={_seatType[0]}
+            value={flight.seatType}
             options={_seatType}
-            onChange={handleChangeSeatType}
+            onChange={(seatType) => setFlight({ ...flight, seatType })}
           />
         </div>
         <br />
         <div className="row">
           <Select
             className="col-md-6"
+            value={flight.departureAirport}
             placeholder="From"
             isSearchable="true"
             isClearable="true"
             name="departureAirport"
             options={airportDepartureList}
-            onChange={handleChangeDeparture}
+            onChange={(departureAirport) =>
+              setFlight({ ...flight, departureAirport })
+            }
           />
           <Select
             className="col-md-6"
+            value={flight.arrivalAirport}
             placeholder="To"
             isSearchable="true"
             isClearable="true"
-            isDisabled={departureFlight.flight ? false : true}
+            isDisabled={flight.departureAirport ? false : true}
             name="arrivalAirport"
             options={airportArrivalList}
-            onChange={handleChangeArrival}
+            onChange={(arrivalAirport) =>
+              setFlight({ ...flight, arrivalAirport })
+            }
           />
         </div>
         <br />
         <div className="row">
           <FaPlaneDeparture style={{ margin: "2%" }} />
-          <input
-            className="col-md-4"
-            value={departureFlightDate.departuredate}
-            type="date"
-            name="departuredate"
-            onChange={handleChangeDepartureDate}
+          <ReactDatePicker
+            className="form-control p-4"
+            placeholderText="Select date"
+            onChange={(departureDate) =>
+              setFlight({ ...flight, departureDate })
+            }
+            selected={flight.departureDate}
           />
-          {flightType === "roundtrip" && (
+          {flight.flightType.value === "roundtrip" && (
             <>
               <FaPlaneArrival style={{ margin: "2%" }} />
-              <input
-                className="col-md-4 "
-                value={arrivalFlightDate.arrivaldate}
-                type="date"
-                name="arrivaldate"
-                onChange={handleChangeArrivalDate}
+              <ReactDatePicker
+                className="form-control p-4"
+                placeholderText="Select date"
+                onChange={(arrivalDate) =>
+                  setFlight({ ...flight, arrivalDate })
+                }
+                selected={flight.arrivalDate}
               />
             </>
           )}
