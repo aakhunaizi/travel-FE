@@ -14,24 +14,29 @@ const reducer = (state = initialState, action) => {
         user: action.payload,
       };
     case types.FETCH_PROFILE:
-      console.log(action.payload);
-      const {
-        email,
-        firstName,
-        lastName,
-        phoneNumber,
-        dateOfBirth,
-      } = action.payload;
-      return {
-        ...state,
-        profile: { email, firstName, lastName, phoneNumber, dateOfBirth },
-        booking: action.payload.booking,
-      };
+      if (action.payload) {
+        const {
+          email,
+          firstName,
+          lastName,
+          phoneNumber,
+          dateOfBirth,
+        } = action.payload;
+        return {
+          ...state,
+          profile: { email, firstName, lastName, phoneNumber, dateOfBirth },
+          booking: action.payload.booking,
+        };
+      }
+
     case types.UPDATE_PROFILE:
-      return {
-        ...state,
-        profile: action.payload.updatedProfile,
-      };
+      if (action.payload) {
+        return {
+          ...state,
+          profile: action.payload.updatedProfile,
+        };
+      }
+
     default:
       return state;
   }
