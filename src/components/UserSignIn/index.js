@@ -12,8 +12,7 @@ import { Helmet } from "react-helmet";
 import { Card } from "@material-ui/core";
 
 //Styles
-import { StyledForm } from "./styles";
-import { StyledCardHeader, StyledP } from "../SignUp/styles";
+import { StyledCard, StyledForm, StyledCardHeader, StyledP } from "./styles";
 
 export default function PassengerSignIn() {
   const { register, handleSubmit } = useForm();
@@ -32,7 +31,7 @@ export default function PassengerSignIn() {
         <title>Sign In</title>
       </Helmet>
       <StyledForm className="container">
-        <Card variant="outlined">
+        <StyledCard variant="outlined">
           <form className="form" onSubmit={handleSubmit(onSubmit)}>
             <StyledCardHeader title="Sign In" />
             <label className="form-label">Username</label>
@@ -69,7 +68,7 @@ export default function PassengerSignIn() {
           <Link to="/signup">
             <StyledP>Don't have an account?</StyledP>
           </Link>
-        </Card>
+        </StyledCard>
       </StyledForm>
     </>
   );

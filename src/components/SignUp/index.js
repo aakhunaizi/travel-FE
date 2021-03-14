@@ -15,6 +15,7 @@ import { Helmet } from "react-helmet";
 
 //Styles
 import {
+  StyledCard,
   StyledCardHeader,
   StyledForm,
   StyledP,
@@ -43,7 +44,7 @@ export default function Signup() {
       </Helmet>
 
       <StyledForm className="container">
-        <Card variant="outlined">
+        <StyledCard variant="outlined">
           <StyledCardHeader title="Sign Up" />
           <form className="form row g-3" onSubmit={handleSubmit(onSubmit)}>
             <div className="col-12">
@@ -188,7 +189,7 @@ export default function Signup() {
           <Link to="/signin">
             <StyledP>Already have an account?</StyledP>
           </Link>
-        </Card>
+        </StyledCard>
       </StyledForm>
     </>
   );
