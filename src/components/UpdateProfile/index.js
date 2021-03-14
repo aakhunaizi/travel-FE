@@ -20,10 +20,6 @@ export default function UpdateProfile() {
 
   const submitAction = (data) => {
     dispatch(updateProfile(data));
-    //Buffer to execute action before reloading page
-    // setTimeout(() => {
-    //   window.location.reload();
-    // }, 500);
   };
 
   return (

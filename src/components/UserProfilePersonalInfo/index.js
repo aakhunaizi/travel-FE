@@ -40,11 +40,6 @@ const UserProfilePersonalInfo = ({
   lastName,
   dateOfBirth,
 }) => {
-  // const dispatch = useDispatch();
-  // const username = useSelector((state) => state.authReducer.user.username);
-  // const checkProfile = useSelector((state) => state.authReducer.profile);
-  // checkProfile === null && dispatch(profile(username));
-
   const classes = useStyles();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);

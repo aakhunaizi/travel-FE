@@ -8,6 +8,7 @@ import UserSignIn from "../UserSignIn";
 import AirlineSignIn from "../AirlineSignIn";
 import Home from "../Home";
 import UserProfile from "../UserProfile";
+import AirlineFlights from "../AirlineFlights";
 
 const Routes = () => {
   const user = useSelector((state) => state.authReducer.user);
@@ -32,6 +33,17 @@ const Routes = () => {
           } else return <Home />;
         }}
       />
+      <Route
+        path={"/flights"}
+        component={() => {
+          if (user === null) {
+            return <AirlineSignIn />;
+          } else if (user && user.role === "airline") {
+            return <AirlineFlights />;
+          } else return <Home />;
+        }}
+      />
+
       <Route path="/">
         <Home />
       </Route>
@@ -40,5 +52,3 @@ const Routes = () => {
 };
 
 export default Routes;
-
-
