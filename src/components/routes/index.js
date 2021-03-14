@@ -24,13 +24,13 @@ const Routes = () => {
       </Route>
       <Route
         path={"/profile"}
-        component={() =>
-          user === null ? (
-            <UserSignIn />
-          ) : (
-            user.role === "user" && <UserProfile />
-          )
-        }
+        component={() => {
+          if (user === null) {
+            return <UserSignIn />;
+          } else if (user && user.role === "user") {
+            return <UserProfile />;
+          } else return <Home />;
+        }}
       />
       <Route path="/">
         <Home />

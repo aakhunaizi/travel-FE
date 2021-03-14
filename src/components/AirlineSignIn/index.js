@@ -12,7 +12,7 @@ import { Helmet } from "react-helmet";
 import { Card } from "@material-ui/core";
 
 //Styles
-import { StyledForm } from "./styles";
+import { StyledCard, StyledForm } from "./styles";
 import { StyledCardHeader } from "./styles";
 
 export default function AirlineSignin() {
@@ -32,7 +32,7 @@ export default function AirlineSignin() {
         <title>Sign In</title>
       </Helmet>
       <StyledForm className="container">
-        <Card variant="outlined">
+        <StyledCard variant="outlined">
           <StyledCardHeader title="Sign In" />
           <form className="form" onSubmit={handleSubmit(onSubmit)}>
             <label className="form-label">Username</label>
@@ -67,7 +67,7 @@ export default function AirlineSignin() {
               value="Sign In"
             />
           </form>
-        </Card>
+        </StyledCard>
       </StyledForm>
     </>
   );

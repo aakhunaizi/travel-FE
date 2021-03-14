@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FaPlaneArrival, FaPlaneDeparture } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import Select from "react-select";
-import { StyledCardHeader, StyledSearch } from "./styles";
+import { StyledCard, StyledCardHeader, StyledSearch } from "./styles";
 
 const Home = () => {
   const [departureFlight, setDepartureFlight] = useState({ flight: "" });
@@ -126,7 +126,7 @@ const Home = () => {
   return (
     <StyledSearch className="container">
       <br />
-      <Card variant="outlined">
+      <StyledCard variant="outlined">
         <StyledCardHeader title="Search for your next destination" />
         <div className="row">
           <Select
@@ -202,7 +202,7 @@ const Home = () => {
             Search
           </Button>
         </CardActions>
-      </Card>
+      </StyledCard>
     </StyledSearch>
   );
 };

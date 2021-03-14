@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { CardHeader } from "@material-ui/core";
+import { Card, CardHeader } from "@material-ui/core";
 
 export const StyledForm = styled.div`
-  width: 25%;
+  width: 30%;
   margin-top: 2%;
 `;
 
@@ -17,4 +17,8 @@ export const StyledCardHeader = styled(CardHeader)`
 export const StyledP = styled.p`
   text-align: center;
   margin-top: 2%;
+`;
+
+export const StyledCard = styled(Card)`
+  padding: 7%;
 `;

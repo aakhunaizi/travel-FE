@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CardHeader } from "@material-ui/core";
+import { Card, CardHeader } from "@material-ui/core";
 
 export const StyledSearch = styled.div`
   width: 50%;
@@ -8,4 +8,8 @@ export const StyledSearch = styled.div`
 
 export const StyledCardHeader = styled(CardHeader)`
   text-align: center;
+`;
+
+export const StyledCard = styled(Card)`
+  padding: 2.5%;
 `;
