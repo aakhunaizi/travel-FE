@@ -9,65 +9,33 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
 
-function createData(
-  reference,
-  date,
-  type,
-  departure,
-  arrival,
-  price,
-  details,
-  options
-) {
-  return { reference, date, type, departure, arrival, price, details, options };
-}
+const UserProfileBookingInfo = ({ booking }) => {
+  const row = booking.map((book) => (
+    <TableRow key={book.id}>
+      <TableCell component="th" scope="row">
+        {book.id}
+      </TableCell>
+      <TableCell>{new Date(book.createdAt).toLocaleDateString()}</TableCell>
+      <TableCell>
+        {book.flights.length == 2 ? "Round trip" : "One way"}
+      </TableCell>
+      <TableCell>{book.flights[0].departureAirport.name}</TableCell>
+      <TableCell>{book.flights[0].arrivalAirport.name}</TableCell>
+      <TableCell>{book.flights[0].price}</TableCell>
+      <TableCell>
+        <Button variant="outlined" color="primary">
+          Details
+        </Button>
+      </TableCell>
 
-const rows = [
-  createData(
-    "32",
-    "2020-07-05",
-    "Round Trip",
-    "Manama Airport",
-    "Samboosa Airport",
-    "128 BD",
-    <Button variant="outlined" color="primary">
-      Details
-    </Button>,
-    <Button variant="outlined" color="secondary" disabled="true">
-      Cancel
-    </Button>
-  ),
-  createData(
-    "32",
-    "2020-07-05",
-    "Round Trip",
-    "Samboosa Airport",
-    "Manama Airport",
-    "128 BD",
-    <Button variant="outlined" color="primary">
-      Details
-    </Button>,
-    <Button variant="outlined" color="secondary" disabled="true">
-      Cancel
-    </Button>
-  ),
-  createData(
-    "158",
-    "2021-03-12",
-    "One Way",
-    "Manama Airport",
-    "Samboosa Airport",
-    "92 BD",
-    <Button variant="outlined" color="primary">
-      Details
-    </Button>,
-    <Button variant="outlined" color="secondary">
-      Cancel
-    </Button>
-  ),
-];
-
-const UserProfileBookingInfo = () => {
+      <TableCell>
+        <Button variant="outlined" color="secondary" disabled="true">
+          Cancel
+        </Button>
+      </TableCell>
+    </TableRow>
+  ));
+  console.log("row->", row);
   return (
     <TableContainer
       component={Paper}
@@ -88,22 +56,7 @@ const UserProfileBookingInfo = () => {
             <TableCell>Options</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.reference}
-              </TableCell>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.type}</TableCell>
-              <TableCell>{row.departure}</TableCell>
-              <TableCell>{row.arrival}</TableCell>
-              <TableCell>{row.price}</TableCell>
-              <TableCell>{row.details}</TableCell>
-              <TableCell>{row.options}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
+        <TableBody>{row}</TableBody>
       </Table>
     </TableContainer>
   );

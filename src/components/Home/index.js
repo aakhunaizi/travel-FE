@@ -2,11 +2,20 @@
 import { Button, Card, CardActions } from "@material-ui/core";
 import { useState } from "react";
 import { FaPlaneArrival, FaPlaneDeparture } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Select from "react-select";
 import { StyledCard, StyledCardHeader, StyledSearch } from "./styles";
-
+import { fetchFlights } from "../../store/actions/flightActions";
 const Home = () => {
+  const dispatch = useDispatch();
+  // const [flight, setFlight] = useState({
+  //   departureAirport: null,
+  //   arrivalAirport: "",
+  //   departureDate: "",
+  //   returnDate: null,
+  //   flightType: "oneway",
+  //   passengers: 0,
+  // });
   const [departureFlight, setDepartureFlight] = useState({ flight: "" });
   const [arrivalFlight, setArrivalFlight] = useState({ flight: "" });
   const [departureFlightDate, setDepartureFlightDate] = useState({
@@ -123,6 +132,11 @@ const Home = () => {
     if (event !== null) setNumberOfSeats(event.value);
   };
 
+  const handleSearch = () => {
+    dispatch(
+      fetchFlights(departureFlight.flight, arrivalFlight.flight, numberOfSeats)
+    );
+  };
   return (
     <StyledSearch className="container">
       <br />
@@ -198,7 +212,7 @@ const Home = () => {
           )}
         </div>
         <CardActions style={{ float: "right" }}>
-          <Button variant="outlined" color="primary">
+          <Button variant="outlined" color="primary" onClick={handleSearch}>
             Search
           </Button>
         </CardActions>
