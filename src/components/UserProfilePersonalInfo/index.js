@@ -33,103 +33,104 @@ const useStyles = makeStyles({
   },
 });
 
-const UserProfilePersonalInfo = () => {
-  const dispatch = useDispatch();
-
-  const username = useSelector((state) => state.authReducer.user.username);
-  const checkProfile = useSelector((state) => state.authReducer.profile);
-  checkProfile === null && dispatch(profile(username));
+const UserProfilePersonalInfo = ({
+  email,
+  phoneNumber,
+  firstName,
+  lastName,
+  dateOfBirth,
+}) => {
+  // const dispatch = useDispatch();
+  // const username = useSelector((state) => state.authReducer.user.username);
+  // const checkProfile = useSelector((state) => state.authReducer.profile);
+  // checkProfile === null && dispatch(profile(username));
 
   const classes = useStyles();
-
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   return (
-    checkProfile && (
-      <>
-        <Helmet>
-          <title>Profile</title>
-        </Helmet>
-        <Card
-          className="container"
-          style={{ width: "60%", marginTop: "2%" }}
-          variant="outlined"
-        >
-          <CardContent>
-            <Typography
-              className={classes.title}
-              color="textSecondary"
-              gutterBottom
-            >
-              First Name
-            </Typography>
-            <Typography variant="h5" component="h2">
-              {checkProfile.firstName}
-            </Typography>
-            <br />
-            <Typography
-              className={classes.title}
-              color="textSecondary"
-              gutterBottom
-            >
-              Last Name
-            </Typography>
-            <Typography variant="h5" component="h2">
-              {checkProfile.lastName}
-            </Typography>
-            <br />
-            <Typography
-              className={classes.title}
-              color="textSecondary"
-              gutterBottom
-            >
-              Phone Number
-            </Typography>
-            <Typography variant="h5" component="h2">
-              {checkProfile.phoneNumber}
-            </Typography>
-            <br />
-            <Typography
-              className={classes.title}
-              color="textSecondary"
-              gutterBottom
-            >
-              Email
-            </Typography>
-            <Typography variant="h5" component="h2">
-              {checkProfile.email}
-            </Typography>
-            <br />
-            <Typography
-              className={classes.title}
-              color="textSecondary"
-              gutterBottom
-            >
-              Date of Birth
-            </Typography>
-            <Typography variant="h5" component="h2">
-              {checkProfile.dateOfBirth}
-            </Typography>
-          </CardContent>
-          <CardActions style={{ float: "right" }}>
-            <Button variant="outlined" color="primary" onClick={handleShow}>
-              Edit
-            </Button>
-          </CardActions>
-        </Card>
-        <Modal show={show} onHide={handleClose} style={{ marginTop: "5%" }}>
-          <Modal.Header closeButton>
-            <Modal.Title>Edit Profile</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <UpdateProfile />
-          </Modal.Body>
-        </Modal>
-      </>
-    )
+    <>
+      <Helmet>
+        <title>Profile</title>
+      </Helmet>
+      <Card
+        className="container"
+        style={{ width: "60%", marginTop: "2%" }}
+        variant="outlined"
+      >
+        <CardContent>
+          <Typography
+            className={classes.title}
+            color="textSecondary"
+            gutterBottom
+          >
+            First Name
+          </Typography>
+          <Typography variant="h5" component="h2">
+            {firstName}
+          </Typography>
+          <br />
+          <Typography
+            className={classes.title}
+            color="textSecondary"
+            gutterBottom
+          >
+            Last Name
+          </Typography>
+          <Typography variant="h5" component="h2">
+            {lastName}
+          </Typography>
+          <br />
+          <Typography
+            className={classes.title}
+            color="textSecondary"
+            gutterBottom
+          >
+            Phone Number
+          </Typography>
+          <Typography variant="h5" component="h2">
+            {phoneNumber}
+          </Typography>
+          <br />
+          <Typography
+            className={classes.title}
+            color="textSecondary"
+            gutterBottom
+          >
+            Email
+          </Typography>
+          <Typography variant="h5" component="h2">
+            {email}
+          </Typography>
+          <br />
+          <Typography
+            className={classes.title}
+            color="textSecondary"
+            gutterBottom
+          >
+            Date of Birth
+          </Typography>
+          <Typography variant="h5" component="h2">
+            {dateOfBirth}
+          </Typography>
+        </CardContent>
+        <CardActions style={{ float: "right" }}>
+          <Button variant="outlined" color="primary" onClick={handleShow}>
+            Edit
+          </Button>
+        </CardActions>
+      </Card>
+      <Modal show={show} onHide={handleClose} style={{ marginTop: "5%" }}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Profile</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <UpdateProfile />
+        </Modal.Body>
+      </Modal>
+    </>
   );
 };
 
