@@ -7,13 +7,15 @@ import Select from "react-select";
 import { StyledCard, StyledCardHeader, StyledSearch } from "./styles";
 import { fetchFlights } from "../../store/actions/flightActions";
 import ReactDatePicker from "react-datepicker";
+import moment from "moment";
+
 const Home = () => {
   const dispatch = useDispatch();
   const [flight, setFlight] = useState({
     departureAirport: null,
     arrivalAirport: "",
-    departureDate: "",
-    arrivalDate: null,
+    departureDate: new Date(),
+    arrivalDate: new Date(),
     flightType: "oneway",
     seatType: "economy",
     passengers: 1,
@@ -96,8 +98,7 @@ const Home = () => {
     }));
 
   const handleSearch = () => {
-    console.log(flight);
-    alert("Flight", flight);
+    dispatch(fetchFlights(flight));
   };
   return (
     <StyledSearch className="container">
@@ -167,9 +168,9 @@ const Home = () => {
           <ReactDatePicker
             className="form-control p-4"
             placeholderText="Select date"
-            onChange={(departureDate) =>
-              setFlight({ ...flight, departureDate })
-            }
+            onChange={(departureDate) => {
+              setFlight({ ...flight, departureDate });
+            }}
             selected={flight.departureDate}
           />
           {flight.flightType.value === "roundtrip" && (

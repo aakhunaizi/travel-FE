@@ -1,20 +1,26 @@
 //Imports
 import instance from "./instance";
-
+import moment from "moment";
 //Action Types
 import * as types from "../actions/types";
 
 //Actions
-export const fetchFlights = (departure, arrival, economySeats) => {
+export const fetchFlights = (flight) => {
   return async (dispatch) => {
     try {
-      console.log("res", departure, arrival, economySeats);
+      const departureDate = moment(flight.departureDate).format("LLLL");
       const res = await instance.get(
-        `flights/search/inbound/?departureId=${departure}&arrivalId=${arrival}&economySeats=${economySeats}`
+        `flights/search/inbound/?departureId=${
+          flight.departureAirport.value
+        }&arrivalId=${flight.arrivalAirport.value}&${
+          flight.seatType === "Economy"
+            ? `economySeats=${flight.passengers.value}`
+            : `businessSeats=${flight.passengers.value}`
+        }&departureDate=${departureDate}`
       );
-      console.log(res);
+      console.log(res.data)
       dispatch({
-        type: types.FETCH_AIRPORTS,
+        type: types.FETCH_FLIGHTS,
         payload: res.data,
       });
     } catch (error) {
