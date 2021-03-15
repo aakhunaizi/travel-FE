@@ -8,6 +8,9 @@ import { StyledCard, StyledCardHeader, StyledSearch } from "./styles";
 import ReactDatePicker from "react-datepicker";
 import moment from "moment";
 
+//Actions
+import { fetchFlights } from "../../store/actions/flightActions";
+
 const Home = () => {
   const dispatch = useDispatch();
   const [flight, setFlight] = useState({
@@ -108,7 +111,7 @@ const Home = () => {
           <Select
             className="col-md-3"
             name="flightType"
-            defaultValue={_flightType[0]}
+            placeholder="Flight Type"
             value={flight.flightType}
             options={_flightType}
             onChange={(flightType) => {
@@ -117,7 +120,7 @@ const Home = () => {
           />
           <Select
             className="col-md-3"
-            defaultValue={_passengers[0]}
+            placeholder="Passengers"
             value={flight.passengers}
             isClearable="true"
             name="passengers"
@@ -127,7 +130,7 @@ const Home = () => {
           <Select
             className="col-md-3"
             name="seatType"
-            defaultValue={_seatType[0]}
+            placeholder="Seat Type"
             value={flight.seatType}
             options={_seatType}
             onChange={(seatType) => setFlight({ ...flight, seatType })}
