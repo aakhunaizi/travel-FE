@@ -38,7 +38,6 @@ const Navbar = () => {
 
   const handleSignout = () => {
     dispatch(signout());
-    dispatch(clearProfile());
     history.replace("/");
   };
 

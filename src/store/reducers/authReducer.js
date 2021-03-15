@@ -8,6 +8,13 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.CLEAR_INFO:
+      return {
+        ...state,
+        user: null,
+        profile: null,
+        booking: null,
+      };
     case types.SET_USER:
       return {
         ...state,
