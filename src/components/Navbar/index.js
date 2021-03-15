@@ -56,17 +56,17 @@ const Navbar = () => {
     <div className={classes.root}>
       <AppBar position="sticky" elevation={0} style={{ background: "#673ab7" }}>
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            {user === null || user.role === "user" ? (
+          {user === null || user.role === "user" ? (
+            <Typography variant="h6" className={classes.title}>
               <Link style={{ textDecoration: "none", color: "white" }} to="/">
                 Final Destination ✈️
               </Link>
-            ) : (
-              <Link style={{ textDecoration: "none", color: "white" }}>
-                Airline Portal
-              </Link>
-            )}
-          </Typography>
+            </Typography>
+          ) : (
+            <Typography variant="h6" className={classes.title}>
+              Airline Portal
+            </Typography>
+          )}
           {user ? (
             <>
               <div>
