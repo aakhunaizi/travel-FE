@@ -11,5 +11,8 @@ export const StyledCardHeader = styled(CardHeader)`
 `;
 
 export const StyledCard = styled(Card)`
-  padding: 2.5%;
+  padding-top: 2.5%;
+  padding-right: 2.5%;
+  padding-left: 2.5%;
+  padding-bottom: 5%;
 `;
