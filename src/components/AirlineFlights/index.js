@@ -1,5 +1,6 @@
 //React Imports
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 
 //Components
 import Table from "@material-ui/core/Table";
@@ -12,21 +13,31 @@ import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
 import { Modal } from "react-bootstrap";
 import CreateFlight from "../CreateAirlineFlight";
+import EditFlight from "../EditAirlineFlight";
 
 //Actions
 import { fetchAirlineFlights } from "../../store/actions/airlineActions";
-import { useState } from "react";
 
 const AirlineFlights = () => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.airlineReducer.loading);
   const flights = useSelector((state) => state.airlineReducer.flights);
-  const [show, setShow] = useState(false);
+  const [createFlightShow, setCreateFlightShow] = useState(false);
+  const [editFlightShow, setEditFlightShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  //Create Flight Modal
+  const handleCreateClose = () => setCreateFlightShow(false);
+  const handleCreateShow = () => setCreateFlightShow(true);
+
+  //Edit Flight Modal
+  const handleEditClose = () => setEditFlightShow(false);
+  const handleEditShow = () => {
+    setEditFlightShow(true);
+  };
 
   if (loading) dispatch(fetchAirlineFlights());
+
+  const flightData = flights.map((flight) => flight.id);
 
   const row = flights.map((flight) => (
     // Make into component
@@ -42,7 +53,12 @@ const AirlineFlights = () => {
       <TableCell>{flight.economySeats}</TableCell>
       <TableCell>{flight.businessSeats}</TableCell>
       <TableCell>
-        <Button variant="outlined" color="primary">
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={handleEditShow}
+          value={flight.id}
+        >
           Edit
         </Button>
       </TableCell>
@@ -66,7 +82,11 @@ const AirlineFlights = () => {
               marginTop: "2%",
             }}
           >
-            <Button variant="outlined" color="primary" onClick={handleShow}>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={handleCreateShow}
+            >
               Add Flight
             </Button>
           </div>
@@ -87,10 +107,9 @@ const AirlineFlights = () => {
             <TableBody>{row}</TableBody>
           </Table>
         </TableContainer>
-
-        <Modal
-          show={show}
-          onHide={handleClose}
+        <Modal //Add flight modal
+          show={createFlightShow}
+          onHide={handleCreateClose}
           style={{ marginTop: "5%" }}
           size="xl"
         >
@@ -99,6 +118,20 @@ const AirlineFlights = () => {
           </Modal.Header>
           <Modal.Body>
             <CreateFlight />
+          </Modal.Body>
+        </Modal>
+
+        <Modal //Edit flight modal
+          show={editFlightShow}
+          onHide={handleEditClose}
+          style={{ marginTop: "5%" }}
+          size="xl"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Flight</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <EditFlight />
           </Modal.Body>
         </Modal>
       </>
