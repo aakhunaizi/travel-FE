@@ -46,7 +46,7 @@ const Home = () => {
   ];
 
   const _passengers = [];
-  for (let index = 1; index < 10; index++) {
+  for (let index = 1; index < 6; index++) {
     _passengers.push({
       value: index,
       label: `${index}`,
