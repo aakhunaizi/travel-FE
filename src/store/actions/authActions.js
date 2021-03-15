@@ -6,7 +6,7 @@ import decode from "jwt-decode";
 import * as types from "../actions/types";
 
 //Actions
-const setUser = (token, profile) => {
+const setUser = (token) => {
   localStorage.setItem("token", token);
   instance.defaults.headers.common.Authorization = `Bearer ${token}`;
   return {
@@ -58,8 +58,7 @@ export const signout = () => {
   localStorage.removeItem("token");
   delete instance.defaults.headers.common.Authorization;
   return {
-    type: types.SET_USER,
-    payload: null,
+    type: types.CLEAR_INFO,
   };
 };
 
@@ -87,13 +86,6 @@ export const profile = () => async (dispatch) => {
   } catch (error) {
     console.error(error);
   }
-};
-
-export const clearProfile = () => {
-  return {
-    type: types.FETCH_PROFILE,
-    payload: null,
-  };
 };
 
 export const updateProfile = (updatedProfile) => {
