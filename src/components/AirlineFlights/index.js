@@ -29,6 +29,7 @@ const AirlineFlights = () => {
   if (loading) dispatch(fetchAirlineFlights());
 
   const row = flights.map((flight) => (
+    // Make into component
     <TableRow key={flight.id}>
       <TableCell component="th" scope="row">
         {flight.id}
