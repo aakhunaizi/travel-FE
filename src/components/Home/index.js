@@ -5,7 +5,6 @@ import { FaPlaneArrival, FaPlaneDeparture } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import Select from "react-select";
 import { StyledCard, StyledCardHeader, StyledSearch } from "./styles";
-import { fetchFlights } from "../../store/actions/flightActions";
 import ReactDatePicker from "react-datepicker";
 import moment from "moment";
 

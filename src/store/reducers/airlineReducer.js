@@ -2,6 +2,7 @@ import * as types from "../actions/types";
 
 const initialState = {
   flights: [],
+  loading: true,
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +11,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         flights: action.payload,
+        loading: false,
+      };
+    case types.CREATE_AIRLINE_FLIGHT:
+      return {
+        ...state,
+        flights: [...state.flights, action.payload.newFlight],
       };
     default:
       return state;
