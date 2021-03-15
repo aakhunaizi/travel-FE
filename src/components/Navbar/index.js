@@ -58,9 +58,15 @@ const Navbar = () => {
       <AppBar position="sticky" elevation={0} style={{ background: "#673ab7" }}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            <Link style={{ textDecoration: "none", color: "white" }} to="/">
-              Final Destination ✈️
-            </Link>
+            {user === null || user.role === "user" ? (
+              <Link style={{ textDecoration: "none", color: "white" }} to="/">
+                Final Destination ✈️
+              </Link>
+            ) : (
+              <Link style={{ textDecoration: "none", color: "white" }}>
+                Airline Portal
+              </Link>
+            )}
           </Typography>
           {user ? (
             <>

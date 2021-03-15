@@ -30,7 +30,9 @@ const Routes = () => {
             return <UserSignIn />;
           } else if (user && user.role === "user") {
             return <UserProfile />;
-          } else return <Home />;
+          } else if (user && user.role === "airline") {
+            return <AirlineFlights />;
+          }
         }}
       />
       <Route
@@ -43,10 +45,16 @@ const Routes = () => {
           } else return <Home />;
         }}
       />
-
-      <Route path="/">
-        <Home />
-      </Route>
+      <Route
+        path={"/"}
+        component={() => {
+          if (user === null || (user && user.role === "user")) {
+            return <Home />;
+          } else if (user && user.role === "airline") {
+            return <AirlineFlights />;
+          }
+        }}
+      />
     </Switch>
   );
 };
