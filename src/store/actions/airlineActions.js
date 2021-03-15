@@ -20,6 +20,16 @@ export const fetchAirlineFlights = () => {
   };
 };
 
-// export const CreateAirlineFlight = (newFlight) => {
-
-// }
+export const CreateAirlineFlight = (newFlight) => {
+  return async (dispatch) => {
+    try {
+      const res = await instance.post("/airlines/flights/add", newFlight);
+      dispatch({
+        type: types.CREATE_AIRLINE_FLIGHT,
+        payload: { newFlight: res.data },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
