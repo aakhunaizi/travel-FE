@@ -47,7 +47,7 @@ export const airlineSignIn = (user, history) => {
       const res = await instance.post("/airline-signin", user);
       localStorage.setItem("token", res.data.token);
       dispatch(setUser(res.data.token));
-      history.replace("/");
+      history.replace("/flights");
     } catch (error) {
       console.error(error);
     }
