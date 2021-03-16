@@ -9,9 +9,12 @@ import AirlineSignIn from "../AirlineSignIn";
 import Home from "../Home";
 import UserProfile from "../UserProfile";
 import AirlineFlights from "../AirlineFlights";
+import FlightList from "../FlightList";
 
 const Routes = () => {
   const user = useSelector((state) => state.authReducer.user);
+  const inbound = useSelector((state) => state.flightReducer.inbound);
+
   return (
     <Switch>
       <Route path={"/signin/airlines"}>
@@ -43,6 +46,14 @@ const Routes = () => {
           } else if (user && user.role === "airline") {
             return <AirlineFlights />;
           } else return <Home />;
+        }}
+      />
+      <Route
+        path={"/search"}
+        component={() => {
+          if (inbound.length === 0) {
+            return <Home />;
+          } else return <FlightList />;
         }}
       />
       <Route

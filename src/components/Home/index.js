@@ -10,6 +10,7 @@ import moment from "moment";
 
 //Actions
 import { fetchFlights } from "../../store/actions/flightActions";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -166,9 +167,11 @@ const Home = () => {
           )}
         </div>
         <CardActions style={{ float: "right" }}>
-          <Button variant="outlined" color="primary" onClick={handleSearch}>
-            Search
-          </Button>
+          <Link to="/search">
+            <Button variant="outlined" color="primary" onClick={handleSearch}>
+              Search
+            </Button>
+          </Link>
         </CardActions>
       </StyledCard>
     </StyledSearch>
