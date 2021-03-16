@@ -10,9 +10,12 @@ import Home from "../Home";
 import UserProfile from "../UserProfile";
 import AirlineFlights from "../AirlineFlights";
 import Checkout from "../Checkout";
+import FlightList from "../FlightList";
 
 const Routes = () => {
   const user = useSelector((state) => state.authReducer.user);
+  const inbound = useSelector((state) => state.flightReducer.inbound);
+
   return (
     <Switch>
       <Route path={"/signin/airlines"}>
@@ -49,6 +52,14 @@ const Routes = () => {
       <Route path="/checkout">
         <Checkout />
       </Route>
+      <Route
+        path={"/search"}
+        component={() => {
+          if (inbound.length === 0) {
+            return <Home />;
+          } else return <FlightList />;
+        }}
+      />
       <Route
         path={"/"}
         component={() => {

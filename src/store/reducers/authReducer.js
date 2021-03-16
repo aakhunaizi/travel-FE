@@ -35,7 +35,7 @@ const reducer = (state = initialState, action) => {
           booking: action.payload.booking,
         };
       }
-
+      break;
     case types.UPDATE_PROFILE:
       if (action.payload) {
         return {
@@ -43,7 +43,7 @@ const reducer = (state = initialState, action) => {
           profile: action.payload.updatedProfile,
         };
       }
-
+      break;
     default:
       return state;
   }

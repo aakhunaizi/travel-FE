@@ -11,13 +11,16 @@ export const fetchFlights = (flight) => {
       const departureDate = moment(flight.departureDate).format("LLLL");
       const res = await instance.get(
         `flights/search/inbound/?departureId=${
-          flight.departureAirport.value
-        }&arrivalId=${flight.arrivalAirport.value}&${
+          flight.departureAirportId
+        }&arrivalId=${flight.arrivalAirportId}&${
           flight.seatType === "Economy"
             ? `economySeats=${flight.passengers.value}`
             : `businessSeats=${flight.passengers.value}`
         }&departureDate=${departureDate}`
       );
+
+      console.log(res.data);
+
       dispatch({
         type: types.FETCH_FLIGHTS,
         payload: res.data,
