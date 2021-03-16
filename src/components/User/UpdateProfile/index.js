@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from "react-redux";
 
 //Actions
-import { profile, updateProfile } from "../../store/actions/authActions";
+import { profile, updateProfile } from "../../../store/actions/authActions";
 
 //Components
 import { useForm } from "react-hook-form";

@@ -1,13 +1,12 @@
 //Components
-
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
+import { StyledTableContainer } from "./styles";
 
 const UserProfileBookingInfo = ({ booking }) => {
   const row = booking.map((book) => (
@@ -17,7 +16,7 @@ const UserProfileBookingInfo = ({ booking }) => {
       </TableCell>
       <TableCell>{new Date(book.createdAt).toLocaleDateString()}</TableCell>
       <TableCell>
-        {book.flights.length == 2 ? "Round trip" : "One way"}
+        {book.flights.length === 2 ? "Round trip" : "One way"}
       </TableCell>
       <TableCell>{book.flights[0].departureAirport.name}</TableCell>
       <TableCell>{book.flights[0].arrivalAirport.name}</TableCell>
@@ -35,12 +34,11 @@ const UserProfileBookingInfo = ({ booking }) => {
       </TableCell>
     </TableRow>
   ));
-  console.log("row->", row);
+
   return (
-    <TableContainer
+    <StyledTableContainer
       component={Paper}
       className="container"
-      style={{ width: "60%", marginTop: "2%" }}
       variant="outlined"
     >
       <Table aria-label="simple table">
@@ -58,7 +56,7 @@ const UserProfileBookingInfo = ({ booking }) => {
         </TableHead>
         <TableBody>{row}</TableBody>
       </Table>
-    </TableContainer>
+    </StyledTableContainer>
   );
 };
 

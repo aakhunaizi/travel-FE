@@ -3,14 +3,20 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //Actions
-import { editAirlineFlight } from "../../store/actions/airlineActions";
+import { editAirlineFlight } from "../../../store/actions/airlineActions";
 
 //Components
 import ReactDatePicker from "react-datepicker";
 import Select from "react-select";
 
 //Styles
-import { StyledCard, StyledForm } from "./styles";
+import {
+  DateContainer,
+  DateLabel,
+  StyledCard,
+  StyledForm,
+  StyledSaveButton,
+} from "./styles";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function EditFlight({ flightEditId }) {
@@ -80,10 +86,10 @@ export default function EditFlight({ flightEditId }) {
                 }
               />
             </div>
-            <div className="row" style={{ marginTop: "2%" }}>
-              <label className="form-label" style={{ margin: "1%" }}>
+            <DateContainer className="row">
+              <DateLabel className="form-label">
                 Departure Date / Departure Time
-              </label>
+              </DateLabel>
               <ReactDatePicker
                 showTimeSelect
                 dateFormat="MMMM d, yyyy h:mm aa"
@@ -93,9 +99,9 @@ export default function EditFlight({ flightEditId }) {
                 }
                 selected={flight.departureDate}
               />
-              <label className="form-label" style={{ margin: "1%" }}>
+              <DateLabel className="form-label">
                 Arrival Date / Arrival Time
-              </label>
+              </DateLabel>
               <ReactDatePicker
                 showTimeSelect
                 dateFormat="MMMM d, yyyy h:mm aa"
@@ -105,7 +111,7 @@ export default function EditFlight({ flightEditId }) {
                 }
                 selected={flight.arrivalDate}
               />
-            </div>
+            </DateContainer>
             <div className="row p-2">
               <div className="col-md-3">
                 <label className="form-label">Economy Seats</label>
@@ -142,16 +148,10 @@ export default function EditFlight({ flightEditId }) {
               </div>
             </div>
 
-            <input
+            <StyledSaveButton
               type="submit"
               className="form-control btn btn-success"
               value="Save Changes"
-              style={{
-                display: "flex",
-                width: "20%",
-                justifyContent: "center",
-                margin: "2% auto",
-              }}
             />
           </form>
         </StyledCard>

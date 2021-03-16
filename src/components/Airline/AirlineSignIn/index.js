@@ -1,20 +1,20 @@
 //React Imports
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 //Actions
-import { userSignIn } from "../../store/actions/authActions";
+import { airlineSignIn } from "../../../store/actions/authActions";
 
 //Components
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet";
-import { Card } from "@material-ui/core";
 
 //Styles
-import { StyledCard, StyledForm, StyledCardHeader, StyledP } from "./styles";
+import { StyledCard, StyledForm } from "./styles";
+import { StyledCardHeader } from "./styles";
 
-export default function PassengerSignIn() {
+export default function AirlineSignin() {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const [password, setPassword] = useState(true);
@@ -22,23 +22,23 @@ export default function PassengerSignIn() {
   const history = useHistory();
 
   const onSubmit = (data) => {
-    dispatch(userSignIn(data, history));
+    dispatch(airlineSignIn(data, history));
   };
 
   return (
     <>
       <Helmet>
-        <title>Sign In</title>
+        <title>Airline Sign In</title>
       </Helmet>
       <StyledForm className="container">
         <StyledCard variant="outlined">
+          <StyledCardHeader title=" Airline Sign In" />
           <form className="form" onSubmit={handleSubmit(onSubmit)}>
-            <StyledCardHeader title="Sign In" />
             <label className="form-label">Username</label>
             <input
               type="text"
               name="username"
-              className="form-control"
+              className="form-control mb-2"
               ref={register({ required: true })}
             />
 
@@ -49,6 +49,7 @@ export default function PassengerSignIn() {
               className="form-control mb-2"
               ref={register({ required: true })}
             />
+
             <div className="mb-3 form-check">
               <input
                 type="checkbox"
@@ -65,9 +66,6 @@ export default function PassengerSignIn() {
               value="Sign In"
             />
           </form>
-          <Link to="/signup">
-            <StyledP>Don't have an account?</StyledP>
-          </Link>
         </StyledCard>
       </StyledForm>
     </>

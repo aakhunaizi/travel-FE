@@ -35,9 +35,9 @@ export const CreateAirlineFlight = (newFlight) => {
 };
 
 export const editAirlineFlight = (editFlight) => {
-  return async (dispatch) => {
+  return async () => {
     try {
-      const res = await instance.put(`/airlines/flights/${editFlight.id}`, editFlight);
+      await instance.put(`/airlines/flights/${editFlight.id}`, editFlight);
     } catch (error) {
       console.error(error);
     }

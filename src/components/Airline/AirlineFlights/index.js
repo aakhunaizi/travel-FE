@@ -6,17 +6,22 @@ import { useState } from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { Button } from "@material-ui/core";
+import { Button, CircularProgress } from "@material-ui/core";
 import { Modal } from "react-bootstrap";
 import CreateFlight from "../CreateAirlineFlight";
 import EditFlight from "../EditAirlineFlight";
+import {
+  Loading,
+  StyledButtonContainer,
+  StyledModal,
+  StyledTableContainer,
+} from "./styles";
 
 //Actions
-import { fetchAirlineFlights } from "../../store/actions/airlineActions";
+import { fetchAirlineFlights } from "../../../store/actions/airlineActions";
 
 const AirlineFlights = () => {
   const dispatch = useDispatch();
@@ -38,8 +43,6 @@ const AirlineFlights = () => {
   };
 
   if (loading) dispatch(fetchAirlineFlights());
-
-  const flightData = flights.map((flight) => flight.id);
 
   const row = flights.map((flight) => (
     // Make into component
@@ -67,23 +70,21 @@ const AirlineFlights = () => {
     </TableRow>
   ));
 
-  if (loading) return <h1>Loading</h1>;
+  if (loading)
+    return (
+      <Loading>
+        <CircularProgress color="primary" />
+      </Loading>
+    );
   else
     return (
       <>
-        <TableContainer
+        <StyledTableContainer
           component={Paper}
           className="container-fluid"
-          style={{ width: "70%", marginTop: "2%", marginBottom: "2%" }}
           variant="outlined"
         >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "2%",
-            }}
-          >
+          <StyledButtonContainer>
             <Button
               variant="outlined"
               color="primary"
@@ -91,7 +92,7 @@ const AirlineFlights = () => {
             >
               Add Flight
             </Button>
-          </div>
+          </StyledButtonContainer>
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
@@ -108,11 +109,11 @@ const AirlineFlights = () => {
             </TableHead>
             <TableBody>{row}</TableBody>
           </Table>
-        </TableContainer>
-        <Modal //Add flight modal
+        </StyledTableContainer>
+
+        <StyledModal //Add flight modal
           show={createFlightShow}
           onHide={handleCreateClose}
-          style={{ marginTop: "5%" }}
           size="xl"
         >
           <Modal.Header closeButton>
@@ -121,11 +122,11 @@ const AirlineFlights = () => {
           <Modal.Body>
             <CreateFlight />
           </Modal.Body>
-        </Modal>
-        <Modal //Edit flight modal
+        </StyledModal>
+
+        <StyledModal //Edit flight modal
           show={editFlightShow}
           onHide={handleEditClose}
-          style={{ marginTop: "5%" }}
           size="xl"
         >
           <Modal.Header closeButton>
@@ -134,7 +135,7 @@ const AirlineFlights = () => {
           <Modal.Body>
             <EditFlight flightEditId={editFlightId} />
           </Modal.Body>
-        </Modal>
+        </StyledModal>
       </>
     );
 };

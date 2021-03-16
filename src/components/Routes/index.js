@@ -3,13 +3,13 @@ import { Route, Switch } from "react-router";
 import { useSelector } from "react-redux";
 
 //Components
-import Signup from "../SignUp";
-import UserSignIn from "../UserSignIn";
-import AirlineSignIn from "../AirlineSignIn";
+import Signup from "../User/SignUp";
+import UserSignIn from "../User/UserSignIn";
+import AirlineSignIn from "../Airline/AirlineSignIn";
 import Home from "../Home";
-import UserProfile from "../UserProfile";
-import AirlineFlights from "../AirlineFlights";
-import FlightList from "../FlightList";
+import UserProfile from "../User/UserProfile";
+import AirlineFlights from "../Airline/AirlineFlights";
+import FlightList from "../Flight/FlightList";
 
 const Routes = () => {
   const user = useSelector((state) => state.authReducer.user);

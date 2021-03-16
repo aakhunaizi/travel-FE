@@ -2,13 +2,14 @@
 import UserProfileBookingInfo from "../UserProfileBookingInfo";
 import UserProfilePersonalInfo from "../UserProfilePersonalInfo";
 import { useSelector, useDispatch } from "react-redux";
-import { profile } from "../../store/actions/authActions";
+import { profile } from "../../../store/actions/authActions";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
   const username = useSelector((state) => state.authReducer.user.username);
   const checkProfile = useSelector((state) => state.authReducer.profile);
   const booking = useSelector((state) => state.authReducer.booking);
+
   checkProfile === null && dispatch(profile(username));
 
   return (

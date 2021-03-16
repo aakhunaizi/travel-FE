@@ -4,13 +4,13 @@ import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
 //Actions
-import { signup } from "../../store/actions/authActions";
+import { signup } from "../../../store/actions/authActions";
 
 import { useForm, Controller } from "react-hook-form";
 
 //Components
 import ReactDatePicker from "react-datepicker";
-import { Card, FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
+import { FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
 import { Helmet } from "react-helmet";
 
 //Styles

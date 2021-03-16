@@ -2,37 +2,30 @@
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
 import FlightListData from "../FlightListData";
+import { StyledButtonContainer, StyledTableContainer } from "./styles";
 
 export default function FlightList() {
   return (
     <>
-      <TableContainer
+      <StyledTableContainer
         component={Paper}
         className="container-fluid"
-        style={{ width: "70%", marginTop: "2%", marginBottom: "2%" }}
         variant="outlined"
       >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "2%",
-          }}
-        >
-          {/* <Button
+        <StyledButtonContainer>
+          {/* <Button //For Filter
           variant="outlined"
           color="primary"
           onClick={handleCreateShow}
         >
-          Add Flight
+          Filter
         </Button> */}
-        </div>
+        </StyledButtonContainer>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -48,7 +41,7 @@ export default function FlightList() {
             <FlightListData />
           </TableBody>
         </Table>
-      </TableContainer>
+      </StyledTableContainer>
     </>
   );
 }

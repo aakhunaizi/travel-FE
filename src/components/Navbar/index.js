@@ -13,7 +13,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
 //Actions
-import { signout, clearProfile } from "../../store/actions/authActions";
+import { signout } from "../../store/actions/authActions";
 
 //Styling
 import { makeStyles } from "@material-ui/core/styles";
