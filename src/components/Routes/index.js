@@ -9,6 +9,7 @@ import AirlineSignIn from "../AirlineSignIn";
 import Home from "../Home";
 import UserProfile from "../UserProfile";
 import AirlineFlights from "../AirlineFlights";
+import Checkout from "../Checkout";
 import FlightList from "../FlightList";
 
 const Routes = () => {
@@ -48,6 +49,9 @@ const Routes = () => {
           } else return <Home />;
         }}
       />
+      <Route path="/checkout">
+        <Checkout />
+      </Route>
       <Route
         path={"/search"}
         component={() => {
