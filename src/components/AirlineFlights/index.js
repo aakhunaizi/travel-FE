@@ -24,6 +24,7 @@ const AirlineFlights = () => {
   const flights = useSelector((state) => state.airlineReducer.flights);
   const [createFlightShow, setCreateFlightShow] = useState(false);
   const [editFlightShow, setEditFlightShow] = useState(false);
+  const [editFlightId, seteditFlightId] = useState();
 
   //Create Flight Modal
   const handleCreateClose = () => setCreateFlightShow(false);
@@ -31,7 +32,8 @@ const AirlineFlights = () => {
 
   //Edit Flight Modal
   const handleEditClose = () => setEditFlightShow(false);
-  const handleEditShow = () => {
+  const handleEditShow = (flightId) => {
+    seteditFlightId(flightId);
     setEditFlightShow(true);
   };
 
@@ -56,7 +58,7 @@ const AirlineFlights = () => {
         <Button
           variant="outlined"
           color="primary"
-          onClick={handleEditShow}
+          onClick={() => handleEditShow(flight.id)}
           value={flight.id}
         >
           Edit
@@ -120,7 +122,6 @@ const AirlineFlights = () => {
             <CreateFlight />
           </Modal.Body>
         </Modal>
-
         <Modal //Edit flight modal
           show={editFlightShow}
           onHide={handleEditClose}
@@ -131,7 +132,7 @@ const AirlineFlights = () => {
             <Modal.Title>Edit Flight</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <EditFlight />
+            <EditFlight flightEditId={editFlightId} />
           </Modal.Body>
         </Modal>
       </>

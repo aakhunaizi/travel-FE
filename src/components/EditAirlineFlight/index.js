@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //Actions
-// import { CreateAirlineFlight } from "../../store/actions/airlineActions";
+import { editAirlineFlight } from "../../store/actions/airlineActions";
 
 //Components
 import ReactDatePicker from "react-datepicker";
@@ -13,19 +13,17 @@ import Select from "react-select";
 import { StyledCard, StyledForm } from "./styles";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function EditFlight() {
-  const [flight, setFlight] = useState({
-    departureAirport: { value: "", label: "" },
-    arrivalAirport: { value: "", label: "" },
-    departureDate: new Date(),
-    arrivalDate: new Date(),
-    economySeats: 1,
-    businessSeats: 1,
-    price: 1,
-  });
-
+export default function EditFlight({ flightEditId }) {
   const airports = useSelector((state) => state.airportReducer.airports);
-  const flights = useSelector((state) => state.airlineReducer.flights);
+  const foundFlight = useSelector((state) =>
+    state.airlineReducer.flights.find((flight) => flight.id === flightEditId)
+  );
+
+  const [flight, setFlight] = useState({
+    ...foundFlight,
+    departureDate: new Date(foundFlight.departureDate),
+    arrivalDate: new Date(foundFlight.arrivalDate),
+  });
 
   const airportDepartureList = airports
     .filter((airport) => airport.id !== flight.arrivalAirport.value)
@@ -43,7 +41,7 @@ export default function EditFlight() {
 
   const dispatch = useDispatch();
   const handleSubmit = (event) => {
-    console.log("Submitted");
+    dispatch(editAirlineFlight(flight));
   };
 
   const handleChange = (event) => {
