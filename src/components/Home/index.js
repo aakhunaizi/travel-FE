@@ -14,8 +14,8 @@ import { fetchFlights } from "../../store/actions/flightActions";
 const Home = () => {
   const dispatch = useDispatch();
   const [flight, setFlight] = useState({
-    departureAirport: null,
-    arrivalAirport: "",
+    departureAirport: { value: "", label: "" },
+    arrivalAirport: { value: "", label: "" },
     departureDate: new Date(),
     arrivalDate: new Date(),
     flightType: "oneway",
@@ -54,22 +54,29 @@ const Home = () => {
   }
 
   const airports = useSelector((state) => state.airportReducer.airports);
+
   const airportDepartureList = airports
-    .filter((airport) => airport.id !== flight.arrivalAirport)
+    .filter((airport) => airport.id !== flight.arrivalAirport.value)
     .map((airport) => ({
       value: airport.id,
       label: `${airport.name}, ${airport.location}`,
     }));
 
   const airportArrivalList = airports
-    .filter((airport) => airport.id !== flight.departureAirport)
+    .filter((airport) => airport.id !== flight.departureAirport.value)
     .map((airport) => ({
       value: airport.id,
       label: `${airport.name}, ${airport.location}`,
     }));
 
   const handleSearch = () => {
-    dispatch(fetchFlights(flight));
+    dispatch(
+      fetchFlights({
+        ...flight,
+        departureAirportId: flight.departureAirport.value,
+        arrivalAirportId: flight.arrivalAirport.value,
+      })
+    );
   };
   return (
     <StyledSearch className="container">

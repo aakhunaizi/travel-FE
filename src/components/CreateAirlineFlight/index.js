@@ -25,7 +25,7 @@ export default function CreateFlight() {
   });
 
   const airports = useSelector((state) => state.airportReducer.airports);
-  console.log(airports);
+
   const airportDepartureList = airports
     .filter((airport) => airport.id !== flight.arrivalAirport.value)
     .map((airport) => ({
