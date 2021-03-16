@@ -18,7 +18,6 @@ export const fetchFlights = (flight) => {
             : `businessSeats=${flight.passengers.value}`
         }&departureDate=${departureDate}`
       );
-      console.log(res.data)
       dispatch({
         type: types.FETCH_FLIGHTS,
         payload: res.data,

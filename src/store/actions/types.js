@@ -13,4 +13,5 @@ export const CREATE_AIRLINE_FLIGHT = "CREATE_AIRLINE_FLIGHT";
 
 //Booking Types
 export const FETCH_FLIGHTS = "FETCH_FLIGHTS";
+
 // export const CREATE_FLIGHT = "CREATE_FLIGHT";
