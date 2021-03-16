@@ -33,3 +33,13 @@ export const CreateAirlineFlight = (newFlight) => {
     }
   };
 };
+
+export const editAirlineFlight = (editFlight) => {
+  return async (dispatch) => {
+    try {
+      const res = await instance.put(`/airlines/flights/${editFlight.id}`, editFlight);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
