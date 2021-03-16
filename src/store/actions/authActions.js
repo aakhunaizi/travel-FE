@@ -97,7 +97,7 @@ export const updateProfile = (updatedProfile) => {
         payload: { updatedProfile: res.data },
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 };

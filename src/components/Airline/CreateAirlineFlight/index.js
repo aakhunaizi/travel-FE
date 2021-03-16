@@ -60,7 +60,6 @@ export default function CreateFlight() {
   const handleChange = (event) => {
     setFlight({ ...flight, [event.target.name]: event.target.value });
   };
-  console.log(flight.arrivalAirport.value);
 
   return (
     <>
