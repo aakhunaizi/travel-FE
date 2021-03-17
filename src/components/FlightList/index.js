@@ -8,8 +8,23 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
 import FlightListData from "../FlightListData";
-
-export default function FlightList() {
+import { useState } from "react";
+export default function FlightList({
+  flightList,
+  setflightId,
+  oneway,
+  type,
+  setSecondDate,
+}) {
+  const row = flightList.map((flight) => (
+    <FlightListData
+      flight={flight}
+      setflightId={setflightId}
+      oneway={oneway}
+      type={type}
+      setSecondDate={setSecondDate}
+    />
+  ));
   return (
     <>
       <TableContainer
@@ -44,9 +59,7 @@ export default function FlightList() {
               <TableCell>Price</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            <FlightListData />
-          </TableBody>
+          <TableBody>{row}</TableBody>
         </Table>
       </TableContainer>
     </>

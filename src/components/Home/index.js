@@ -7,12 +7,12 @@ import Select from "react-select";
 import { StyledCard, StyledCardHeader, StyledSearch } from "./styles";
 import ReactDatePicker from "react-datepicker";
 import moment from "moment";
-
+import { useHistory } from "react-router-dom";
 //Actions
 import { fetchFlights } from "../../store/actions/flightActions";
-import { Link } from "react-router-dom";
-
+import { getFlightInfo } from "../../store/actions/bookingActions";
 const Home = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [flight, setFlight] = useState({
     departureAirport: { value: "", label: "" },
@@ -72,7 +72,17 @@ const Home = () => {
 
   const handleSearch = () => {
     dispatch(
-      fetchFlights({
+      fetchFlights(
+        {
+          ...flight,
+          departureAirportId: flight.departureAirport.value,
+          arrivalAirportId: flight.arrivalAirport.value,
+        },
+        history
+      )
+    );
+    dispatch(
+      getFlightInfo({
         ...flight,
         departureAirportId: flight.departureAirport.value,
         arrivalAirportId: flight.arrivalAirport.value,
@@ -84,19 +94,20 @@ const Home = () => {
       <br />
       <StyledCard variant="outlined">
         <StyledCardHeader title="Search for your next destination" />
-        <div className="row">
+        <div className="row p-2">
+          <div className="col-md-4">
+            <Select
+              name="flightType"
+              placeholder="Flight Type"
+              value={flight.flightType}
+              options={_flightType}
+              onChange={(flightType) => {
+                setFlight({ ...flight, flightType });
+              }}
+            />
+          </div>
           <Select
-            className="col-md-3"
-            name="flightType"
-            placeholder="Flight Type"
-            value={flight.flightType}
-            options={_flightType}
-            onChange={(flightType) => {
-              setFlight({ ...flight, flightType });
-            }}
-          />
-          <Select
-            className="col-md-3"
+            className="col-md-4"
             placeholder="Passengers"
             value={flight.passengers}
             isClearable="true"
@@ -105,7 +116,7 @@ const Home = () => {
             onChange={(passengers) => setFlight({ ...flight, passengers })}
           />
           <Select
-            className="col-md-3"
+            className="col-md-4"
             name="seatType"
             placeholder="Seat Type"
             value={flight.seatType}
@@ -113,39 +124,37 @@ const Home = () => {
             onChange={(seatType) => setFlight({ ...flight, seatType })}
           />
         </div>
-        <br />
-        <div className="row">
-          <Select
-            className="col-md-6"
-            value={flight.departureAirport}
-            placeholder="From"
-            isSearchable="true"
-            isClearable="true"
-            name="departureAirport"
-            options={airportDepartureList}
-            onChange={(departureAirport) =>
-              setFlight({ ...flight, departureAirport })
-            }
-          />
-          <Select
-            className="col-md-6"
-            value={flight.arrivalAirport}
-            placeholder="To"
-            isSearchable="true"
-            isClearable="true"
-            isDisabled={flight.departureAirport ? false : true}
-            name="arrivalAirport"
-            options={airportArrivalList}
-            onChange={(arrivalAirport) =>
-              setFlight({ ...flight, arrivalAirport })
-            }
-          />
+        <div className="row mt-2 p-2">
+          <div className="col-md-6">
+            <Select
+              placeholder={<div>From</div>}
+              isSearchable="true"
+              isClearable="true"
+              name="departureAirport"
+              options={airportDepartureList}
+              onChange={(departureAirport) =>
+                setFlight({ ...flight, departureAirport })
+              }
+            />
+          </div>
+          <div className="col-md-6">
+            <Select
+              placeholder="To"
+              isSearchable="true"
+              isClearable="true"
+              isDisabled={flight.departureAirport ? false : true}
+              name="arrivalAirport"
+              options={airportArrivalList}
+              onChange={(arrivalAirport) =>
+                setFlight({ ...flight, arrivalAirport })
+              }
+            />
+          </div>
         </div>
-        <br />
-        <div className="row">
+        <div className="row mt-2 p-2">
           <FaPlaneDeparture style={{ margin: "2%" }} />
           <ReactDatePicker
-            className="form-control p-4"
+            className="form-control p-2"
             placeholderText="Select date"
             onChange={(departureDate) => {
               setFlight({ ...flight, departureDate });
@@ -156,7 +165,7 @@ const Home = () => {
             <>
               <FaPlaneArrival style={{ margin: "2%" }} />
               <ReactDatePicker
-                className="form-control p-4"
+                className="form-control p-2"
                 placeholderText="Select date"
                 onChange={(arrivalDate) =>
                   setFlight({ ...flight, arrivalDate })
@@ -167,11 +176,9 @@ const Home = () => {
           )}
         </div>
         <CardActions style={{ float: "right" }}>
-          <Link to="/search">
-            <Button variant="outlined" color="primary" onClick={handleSearch}>
-              Search
-            </Button>
-          </Link>
+          <Button variant="outlined" color="primary" onClick={handleSearch}>
+            Search
+          </Button>
         </CardActions>
       </StyledCard>
     </StyledSearch>

@@ -10,8 +10,7 @@ import Home from "../Home";
 import UserProfile from "../UserProfile";
 import AirlineFlights from "../AirlineFlights";
 import Checkout from "../Checkout";
-import FlightList from "../FlightList";
-
+import FlightListPage from "../FlightListPage"
 const Routes = () => {
   const user = useSelector((state) => state.authReducer.user);
   const inbound = useSelector((state) => state.flightReducer.inbound);
@@ -57,7 +56,7 @@ const Routes = () => {
         component={() => {
           if (inbound.length === 0) {
             return <Home />;
-          } else return <FlightList />;
+          } else return <FlightListPage />;
         }}
       />
       <Route

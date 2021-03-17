@@ -6,35 +6,42 @@ import { useSelector } from "react-redux";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import { Button } from "@material-ui/core";
-
-export default function FlightListData() {
-  const flights = useSelector((state) => state.flightReducer.inbound);
-  const [flightId, setFlightId] = useState();
-  const handleChange = (flightId) => {
-    setFlightId(flightId);
+export default function FlightListData(props) {
+  const [selected, setselected] = useState(false);
+  const handelBooking = (flightId, arrivalDate) => {
+    if (props.oneway === "oneway" && props.type === "inbound") {
+      props.setflightId(flightId);
+    } else if (props.oneway === "roundtrip" && props.type === "inbound") {
+      props.setflightId(flightId);
+      props.setSecondDate(arrivalDate);
+    } else if (props.oneway === "roundtrip" && props.type === "outbound") {
+      props.setflightId(flightId);
+    }
+    setselected(!selected);
   };
 
-  const row = flights.map((flight) => (
-    <TableRow key={flight.id}>
-      <TableCell component="th" scope="row">
-        {flight.id}
+  return (
+    <TableRow key={props.flight.id} selected={selected}>
+      <TableCell component="th" scope="row" >
+        {props.flight.id}
       </TableCell>
-      <TableCell>{flight.departureAirport.name}</TableCell>
-      <TableCell>{flight.arrivalAirport.name}</TableCell>
-      <TableCell>{flight.departureDate}</TableCell>
-      <TableCell>{flight.arrivalDate}</TableCell>
-      <TableCell>{flight.price}</TableCell>
+      <TableCell>{props.flight.departureAirport.name}</TableCell>
+      <TableCell>{props.flight.arrivalAirport.name}</TableCell>
+      <TableCell>{props.flight.departureDate}</TableCell>
+      <TableCell>{props.flight.arrivalDate}</TableCell>
+      <TableCell>{props.flight.price}</TableCell>
       <TableCell>
         <Button
           variant="outlined"
           color="primary"
-          onClick={() => handleChange(flight.id)}
-          value={flight.id}
+          onClick={() =>
+            handelBooking(props.flight.id, props.flight.arrivalDate)
+          }
+          value={props.flight.id}
         >
           Book
         </Button>
       </TableCell>
     </TableRow>
-  ));
-  return row;
+  );
 }

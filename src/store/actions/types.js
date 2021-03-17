@@ -13,5 +13,7 @@ export const CREATE_AIRLINE_FLIGHT = "CREATE_AIRLINE_FLIGHT";
 
 //Booking Types
 export const FETCH_FLIGHTS = "FETCH_FLIGHTS";
-
+export const FETCH_ROUNDWAY_FLIGHT = "FETCH_ROUNDWAY_FLIGHT";
+export const GET_SEATS = "GET_SEATS";
+export const GET_FLIGHT_ID = "GET_FLIGHT_ID";
 // export const CREATE_FLIGHT = "CREATE_FLIGHT";

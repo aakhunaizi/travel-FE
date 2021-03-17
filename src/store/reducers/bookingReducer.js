@@ -2,17 +2,21 @@ import * as types from "../actions/types";
 
 const initialState = {
   passengers: [],
-  seatType: "",
-  seats: 0,
   flights: [],
+  flightInfo: null,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.FETCH_FLIGHTS:
+    case types.GET_SEATS:
       return {
         ...state,
-        inbound: action.payload,
+        flightInfo: action.payload,
+      };
+    case types.GET_FLIGHT_ID:
+      return {
+        ...state,
+        flights: action.payload,
       };
     default:
       return state;
