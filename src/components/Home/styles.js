@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { Card, CardHeader } from "@material-ui/core";
+import { Card, CardActions, CardHeader } from "@material-ui/core";
+import { FaPlaneArrival, FaPlaneDeparture } from "react-icons/fa";
 
 export const StyledSearch = styled.div`
   width: 50%;
@@ -15,4 +16,16 @@ export const StyledCard = styled(Card)`
   padding-right: 2.5%;
   padding-left: 2.5%;
   padding-bottom: 5%;
+`;
+
+export const StyledCardActions = styled(CardActions)`
+  float: right;
+`;
+
+export const StyledFaPlaneDeparture = styled(FaPlaneDeparture)`
+  margin: 2%;
+`;
+
+export const StyledFaPlaneArrival = styled(FaPlaneArrival)`
+  margin: 2%;
 `;

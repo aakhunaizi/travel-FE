@@ -4,20 +4,25 @@ import { useHistory } from "react-router";
 import { useState } from "react";
 
 //Components
-import AppBar from "@material-ui/core/AppBar";
+import {
+  LogoLink,
+  StyledAppBar,
+  StyledFaRegUserCircle,
+  MenuLink,
+  MenuLinkWhite,
+  StyledMenuItem,
+} from "./styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { FaRegUserCircle } from "react-icons/fa";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
 //Actions
-import { signout, clearProfile } from "../../store/actions/authActions";
+import { signout } from "../../store/actions/authActions";
 
 //Styling
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,13 +59,11 @@ const Navbar = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <AppBar position="sticky" elevation={0} style={{ background: "#673ab7" }}>
+      <StyledAppBar elevation={0}>
         <Toolbar>
           {user === null || user.role === "user" ? (
             <Typography variant="h6" className={classes.title}>
-              <Link style={{ textDecoration: "none", color: "white" }} to="/">
-                Final Destination ✈️
-              </Link>
+              <LogoLink to="/">Final Destination ✈️</LogoLink>
             </Typography>
           ) : (
             <Typography variant="h6" className={classes.title}>
@@ -70,8 +73,7 @@ const Navbar = () => {
           {user ? (
             <>
               <div>
-                <FaRegUserCircle
-                  style={{ marginRight: "5px" }}
+                <StyledFaRegUserCircle
                   color="#fff"
                   size="1.5em"
                   aria-controls="simple-menu"
@@ -87,51 +89,36 @@ const Navbar = () => {
                   onClose={handleClose}
                 >
                   {user.role === "user" ? (
-                    <Link
-                      style={{ color: "black", textDecoration: "none" }}
-                      to="/profile"
-                    >
+                    <MenuLink to="/profile">
                       <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    </Link>
+                    </MenuLink>
                   ) : (
                     user.role === "airline" && (
-                      <Link
-                        style={{ color: "black", textDecoration: "none" }}
-                        to="/flights"
-                      >
+                      <MenuLink to="/flights">
                         <MenuItem onClick={handleClose}>Flights</MenuItem>
-                      </Link>
+                      </MenuLink>
                     )
                   )}
 
-                  <MenuItem
-                    style={{ color: "black", textDecoration: "none" }}
-                    onClick={handleSignout}
-                  >
+                  <StyledMenuItem onClick={handleSignout}>
                     Sign out
-                  </MenuItem>
+                  </StyledMenuItem>
                 </Menu>
               </div>
             </>
           ) : (
             <>
-              <Link
-                style={{ textDecoration: "none", color: "white" }}
-                to="/signup"
-              >
+              <MenuLinkWhite to="/signup">
                 <Button color="inherit">Sign up</Button>
-              </Link>
+              </MenuLinkWhite>
 
-              <Link
-                style={{ textDecoration: "none", color: "white" }}
-                to="/signin"
-              >
+              <MenuLinkWhite to="/signin">
                 <Button color="inherit">Sign in</Button>
-              </Link>
+              </MenuLinkWhite>
             </>
           )}
         </Toolbar>
-      </AppBar>
+      </StyledAppBar>
     </div>
   );
 };
