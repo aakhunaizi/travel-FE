@@ -7,8 +7,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@material-ui/core";
 import Select from "react-select";
 import {
+  BackgroundContainer,
   StyledCard,
   StyledCardActions,
+  StyledCardContainer,
   StyledCardHeader,
   StyledFaPlaneArrival,
   StyledFaPlaneDeparture,
@@ -100,17 +102,12 @@ const Home = () => {
   };
 
   return (
-    <div
-      className="vh-100"
-      style={{
-        backgroundImage: `url("https://i.redd.it/cy1vbp2axhy41.png")`,
-      }}
-    >
+    <BackgroundContainer className="vh-100">
       <StyledSearch className="container">
         <br />
         <br />
         <br />
-        <div style={{ margin: "10% auto" }}>
+        <StyledCardContainer>
           <StyledCard variant="outlined">
             <StyledCardHeader title="Search for your next destination" />
             <div className="row p-2">
@@ -200,9 +197,9 @@ const Home = () => {
               </Button>
             </StyledCardActions>
           </StyledCard>
-        </div>
+        </StyledCardContainer>
       </StyledSearch>
-    </div>
+    </BackgroundContainer>
   );
 };
 

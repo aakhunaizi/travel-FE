@@ -29,3 +29,11 @@ export const StyledFaPlaneDeparture = styled(FaPlaneDeparture)`
 export const StyledFaPlaneArrival = styled(FaPlaneArrival)`
   margin: 2%;
 `;
+
+export const BackgroundContainer = styled.div`
+  background-image: url("https://i.redd.it/cy1vbp2axhy41.png");
+`;
+
+export const StyledCardContainer = styled.div`
+  margin: 10% auto;
+`;
