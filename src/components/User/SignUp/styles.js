@@ -3,7 +3,7 @@ import { Card, CardHeader } from "@material-ui/core";
 
 export const StyledForm = styled.div`
   width: 30%;
-  margin-top: 2%;
+  margin-top: 5%;
 `;
 
 export const StyledValidationText = styled.div`
