@@ -1,16 +1,25 @@
-//Components
-import { Button, Card, CardActions } from "@material-ui/core";
+//React Imports
 import { useState } from "react";
-import { FaPlaneArrival, FaPlaneDeparture } from "react-icons/fa";
-import { useSelector, useDispatch } from "react-redux";
-import Select from "react-select";
-import { StyledCard, StyledCardHeader, StyledSearch } from "./styles";
-import ReactDatePicker from "react-datepicker";
-import moment from "moment";
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
+//Components
+import { Button, CardActions } from "@material-ui/core";
+import Select from "react-select";
+import {
+  StyledCard,
+  StyledCardActions,
+  StyledCardHeader,
+  StyledFaPlaneArrival,
+  StyledFaPlaneDeparture,
+  StyledSearch,
+} from "./styles";
+import ReactDatePicker from "react-datepicker";
+
 //Actions
 import { fetchFlights } from "../../store/actions/flightActions";
 import { getFlightInfo } from "../../store/actions/bookingActions";
+
 const Home = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -89,6 +98,7 @@ const Home = () => {
       })
     );
   };
+
   return (
     <StyledSearch className="container">
       <br />
@@ -152,7 +162,7 @@ const Home = () => {
           </div>
         </div>
         <div className="row mt-2 p-2">
-          <FaPlaneDeparture style={{ margin: "2%" }} />
+          <StyledFaPlaneDeparture />
           <ReactDatePicker
             className="form-control p-2"
             placeholderText="Select date"
@@ -163,7 +173,7 @@ const Home = () => {
           />
           {flight.flightType.value === "roundtrip" && (
             <>
-              <FaPlaneArrival style={{ margin: "2%" }} />
+              <StyledFaPlaneArrival />
               <ReactDatePicker
                 className="form-control p-2"
                 placeholderText="Select date"
@@ -175,11 +185,11 @@ const Home = () => {
             </>
           )}
         </div>
-        <CardActions style={{ float: "right" }}>
+        <StyledCardActions>
           <Button variant="outlined" color="primary" onClick={handleSearch}>
             Search
           </Button>
-        </CardActions>
+        </StyledCardActions>
       </StyledCard>
     </StyledSearch>
   );

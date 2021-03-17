@@ -1,5 +1,6 @@
 //Imports
 import instance from "./instance";
+
 //Action Types
 import * as types from "../actions/types";
 
@@ -7,7 +8,6 @@ import * as types from "../actions/types";
 export const bookFlight = async (flightInfo) => {
   try {
     const res = await instance.post("/booking", flightInfo);
-    console.log(res.status);
   } catch (error) {
     console.error(error);
   }
@@ -21,21 +21,21 @@ export const getFlightInfo = (flight) => {
         payload: flight,
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 };
 
-export const getFightId = (flightIds,history) => {
+export const getFightId = (flightIds, history) => {
   return async (dispatch) => {
     try {
       dispatch({
         type: types.GET_FLIGHT_ID,
         payload: flightIds,
       });
-      history.replace("/checkout")
+      history.replace("/checkout");
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 };
