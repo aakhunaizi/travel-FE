@@ -1,28 +1,49 @@
-import { useState } from "react";
-import { ListGroup, Collapse, Card } from "react-bootstrap";
-import ChechoutForm from "../CheckoutForm";
-
+import { ListGroup } from "react-bootstrap";
+import CheckoutList from "../CheckoutList";
+import { useSelector, useDispatch } from "react-redux";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { bookFlight } from "../../../store/actions/bookingActions";
 export default function Checkout() {
-  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const booking = useSelector((state) => state.bookingReducer);
+  const flightSeatsType = booking.flightInfo.seatType.value;
+  const passengers = booking.flightInfo.passengers.value;
+  const passengersBooking = booking.passengers.length;
+
+  const handleBooking = () => {
+    if (flightSeatsType === "economy") {
+      bookFlight({
+        passengers: booking.passengers,
+        flights: booking.flights,
+        economySeats: passengers,
+      });
+    } else if (flightSeatsType === "business") {
+      bookFlight({
+        passengers: booking.passengers,
+        flights: booking.flights,
+        businessSeats: passengers,
+      });
+    }
+  };
 
   return (
-    <>
-      <div class="container mt-5">
-        <ListGroup variant="flush">
-          <ListGroup.Item onClick={() => setOpen(!open)}>
-            Passenger 1
-          </ListGroup.Item>
-          <Collapse in={open}>
-            <Card>
-              <Card.Body>
-                <ChechoutForm />
-              </Card.Body>
-            </Card>
-          </Collapse>
-          <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-          <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-        </ListGroup>
+    <div className="container mt-5">
+      <ToastContainer autoClose={2000} />
+      <ListGroup variant="flush" style={{ marginTop: "10%" }}>
+        {Array.from({ length: passengers }, (_, index) => (
+          <CheckoutList passengerNumber={index + 1} />
+        ))}
+      </ListGroup>
+      <div className="row d-flex align-item-end">
+        <button
+          className="btn btn-outline-success mt-2 ml-auto"
+          disabled={passengers === passengersBooking ? false : true}
+          onClick={handleBooking}
+        >
+          Checkout
+        </button>
       </div>
-    </>
+    </div>
   );
 }

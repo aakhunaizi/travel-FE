@@ -1,5 +1,6 @@
 //Imports
 import instance from "./instance";
+import { toast } from "react-toastify";
 
 //Action Types
 import * as types from "../actions/types";
@@ -8,8 +9,9 @@ import * as types from "../actions/types";
 export const bookFlight = async (flightInfo) => {
   try {
     const res = await instance.post("/booking", flightInfo);
+    toast.success("Booked Successfully");
   } catch (error) {
-    console.error(error);
+    toast.error("Error While Booking");
   }
 };
 
@@ -34,6 +36,21 @@ export const getFightId = (flightIds, history) => {
         payload: flightIds,
       });
       history.replace("/checkout");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+export const getPassengerInfo = (passengerInfo) => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: types.GET_PASSENGER,
+        payload: passengerInfo,
+      });
+      toast.success(
+        `${passengerInfo.firstName} ${passengerInfo.lastName} Added`
+      );
     } catch (error) {
       console.error(error);
     }

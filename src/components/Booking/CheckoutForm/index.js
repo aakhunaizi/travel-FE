@@ -2,19 +2,16 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import ReactDatePicker from "react-datepicker";
-import { bookFlight } from "../../../store/actions/bookingActions";
+import { getPassengerInfo } from "../../../store/actions/bookingActions";
+
 export default function ChechoutForm() {
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
   const [startDate, setStartDate] = useState(new Date());
-  //   const [passengers, setPassengers] = useState([])
   const onSubmit = (data) => {
-    bookFlight({
-      economySeats: 2,
-      flights: [13],
-      passengers: [data],
-    });
-    console.log({ ...data, dateOfBirth: startDate.toLocaleDateString() });
+    dispatch(
+      getPassengerInfo({ ...data, dateOfBirth: startDate.toLocaleDateString() })
+    );
   };
 
   return (

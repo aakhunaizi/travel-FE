@@ -16,3 +16,4 @@ export const FETCH_FLIGHTS = "FETCH_FLIGHTS";
 export const FETCH_ROUNDWAY_FLIGHT = "FETCH_ROUNDWAY_FLIGHT";
 export const GET_SEATS = "GET_SEATS";
 export const GET_FLIGHT_ID = "GET_FLIGHT_ID";
+export const GET_PASSENGER = "GET_PASSENGER";
