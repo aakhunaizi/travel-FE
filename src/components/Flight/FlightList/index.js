@@ -7,7 +7,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
 import FlightListData from "../FlightListData";
-import { StyledButtonContainer, StyledTableContainer } from "./styles";
+import { StyledTableContainer } from "./styles";
+import { useState } from "react";
 
 export default function FlightList({
   flightList,
@@ -32,15 +33,6 @@ export default function FlightList({
         className="container-fluid"
         variant="outlined"
       >
-        <StyledButtonContainer>
-          {/* <Button
-          variant="outlined"
-          color="primary"
-          onClick={handleCreateShow}
-        >
-          Add Flight
-        </Button> */}
-        </StyledButtonContainer>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>

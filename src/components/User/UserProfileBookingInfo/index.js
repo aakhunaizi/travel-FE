@@ -24,11 +24,6 @@ const UserProfileBookingInfo = ({ booking }) => {
       <TableCell>{book.flights[0].arrivalAirport.name}</TableCell>
       <TableCell>{book.flights[0].arrivalDate}</TableCell>
       <TableCell>{book.flights[0].price} BD</TableCell>
-      <TableCell>
-        <Button variant="outlined" color="secondary" disabled="true">
-          Cancel
-        </Button>
-      </TableCell>
     </TableRow>
   ));
 
@@ -50,7 +45,6 @@ const UserProfileBookingInfo = ({ booking }) => {
             <TableCell>Arrival Airport</TableCell>
             <TableCell>Arrival Date/Time</TableCell>
             <TableCell>Price</TableCell>
-            <TableCell>Options</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>{row}</TableBody>
