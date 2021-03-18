@@ -1,6 +1,8 @@
 //Imports
 import instance from "./instance";
 import moment from "moment";
+import { toast } from "react-toastify";
+
 //Action Types
 import * as types from "../actions/types";
 
@@ -18,13 +20,16 @@ export const fetchFlights = (flight, history) => {
             : `businessSeats=${flight.passengers.value}`
         }&departureDate=${departureDate}`
       );
+      if (res.data.length === 0) {
+        throw new Error("No Trips Avaiable on This Date");
+      }
       dispatch({
         type: types.FETCH_FLIGHTS,
         payload: res.data,
       });
       history.replace("/search");
     } catch (error) {
-      console.error(error);
+      toast.error(error.message);
     }
   };
 };
@@ -41,12 +46,15 @@ export const fetchSecondFlights = (flight, arrivalDate) => {
             : `businessSeats=${flight.passengers.value}`
         }&departureDate=${departureDateFrom}&arrivalDate=${arrivalDate}`
       );
+      if (res.data.length === 0) {
+        throw new Error("No Roundtrips Avaiable on This Date");
+      }
       dispatch({
         type: types.FETCH_ROUNDWAY_FLIGHT,
         payload: res.data,
       });
     } catch (error) {
-      console.error(error);
+      toast.error(error.message);
     }
   };
 };

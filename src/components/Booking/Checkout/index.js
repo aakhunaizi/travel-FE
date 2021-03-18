@@ -4,26 +4,37 @@ import { useSelector, useDispatch } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { bookFlight } from "../../../store/actions/bookingActions";
+import { useHistory } from "react-router-dom";
 export default function Checkout() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const booking = useSelector((state) => state.bookingReducer);
+  const user = useSelector((state) => state.authReducer.user);
   const flightSeatsType = booking.flightInfo.seatType.value;
   const passengers = booking.flightInfo.passengers.value;
   const passengersBooking = booking.passengers.length;
 
   const handleBooking = () => {
     if (flightSeatsType === "economy") {
-      bookFlight({
-        passengers: booking.passengers,
-        flights: booking.flights,
-        economySeats: passengers,
-      });
+      bookFlight(
+        {
+          passengers: booking.passengers,
+          flights: booking.flights,
+          economySeats: passengers,
+        },
+        user,
+        history
+      );
     } else if (flightSeatsType === "business") {
-      bookFlight({
-        passengers: booking.passengers,
-        flights: booking.flights,
-        businessSeats: passengers,
-      });
+      bookFlight(
+        {
+          passengers: booking.passengers,
+          flights: booking.flights,
+          businessSeats: passengers,
+        },
+        user,
+        history
+      );
     }
   };
 
