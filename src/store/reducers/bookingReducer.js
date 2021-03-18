@@ -23,6 +23,14 @@ const reducer = (state = initialState, action) => {
         ...state,
         passengers: [...state.passengers, action.payload],
       };
+    case types.CHANGE_FLIGHT_TYPE:
+      return {
+        ...state,
+        flightInfo: [
+          ...state.flightInfo,
+          { flightType: { value: "oneway", label: "One Way" } },
+        ],
+      };
     default:
       return state;
   }

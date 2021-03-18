@@ -17,12 +17,13 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-
+import { useLocation } from "react-router-dom";
 //Actions
 import { signout } from "../../store/actions/authActions";
 
 //Styling
 import { makeStyles } from "@material-ui/core/styles";
+import { AppBar } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navbar = () => {
+  let location = useLocation();
   const user = useSelector((state) => state.authReducer.user);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -45,7 +47,6 @@ const Navbar = () => {
     dispatch(signout());
     history.replace("/");
   };
-
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -59,7 +60,12 @@ const Navbar = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <StyledAppBar elevation={0}>
+      <AppBar
+        elevation={0}
+        className={
+          location.pathname === "/" ? "bg-transparent" : "navbar-light shadow "
+        }
+      >
         <Toolbar>
           {user === null || user.role === "user" ? (
             <Typography variant="h6" className={classes.title}>
@@ -118,7 +124,7 @@ const Navbar = () => {
             </>
           )}
         </Toolbar>
-      </StyledAppBar>
+      </AppBar>
     </div>
   );
 };

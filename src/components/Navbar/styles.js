@@ -5,7 +5,6 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { MenuItem } from "@material-ui/core";
 
 export const StyledAppBar = styled(AppBar)`
-  background: #673ab7;
 `;
 
 export const LogoLink = styled(Link)`

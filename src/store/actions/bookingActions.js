@@ -6,9 +6,14 @@ import { toast } from "react-toastify";
 import * as types from "../actions/types";
 
 //Actions
-export const bookFlight = async (flightInfo) => {
+export const bookFlight = async (flightInfo, user, history) => {
   try {
-    const res = await instance.post("/booking", flightInfo);
+    let res;
+    if (user) {
+      res = await instance.post("/booking/user", flightInfo);
+    } else {
+      res = await instance.post("/booking", flightInfo);
+    }
     toast.success("Booked Successfully");
   } catch (error) {
     toast.error("Error While Booking");
@@ -36,6 +41,18 @@ export const getFightId = (flightIds, history) => {
         payload: flightIds,
       });
       history.replace("/checkout");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+export const changeFlightType = () => {
+  return async (dispatch) => {
+    console.log("chanmge flgiht");
+    try {
+      dispatch({
+        type: types.CHANGE_FLIGHT_TYPE,
+      });
     } catch (error) {
       console.error(error);
     }

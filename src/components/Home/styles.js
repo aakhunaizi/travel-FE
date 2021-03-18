@@ -31,7 +31,8 @@ export const StyledFaPlaneArrival = styled(FaPlaneArrival)`
 `;
 
 export const BackgroundContainer = styled.div`
-  background-image: url("https://i.redd.it/cy1vbp2axhy41.png");
+  background-image: url("https://images.unsplash.com/photo-1552078083-9d75f4040f2d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80");
+  background-size: cover;
 `;
 
 export const StyledCardContainer = styled.div`

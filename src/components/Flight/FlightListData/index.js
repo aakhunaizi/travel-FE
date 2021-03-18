@@ -8,7 +8,6 @@ import { Button } from "@material-ui/core";
 import { ToastContainer, toast } from "react-toastify";
 
 export default function FlightListData(props) {
-  const [selected, setselected] = useState(false);
   const handelBooking = (flightId, arrivalDate) => {
     if (props.oneway === "oneway" && props.type === "inbound") {
       props.setflightId(flightId);

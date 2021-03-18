@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 //Components
 import { Button } from "@material-ui/core";
 import Select from "react-select";
@@ -103,12 +104,13 @@ const Home = () => {
 
   return (
     <BackgroundContainer className="vh-100">
+      <ToastContainer autoClose={2000} />
       <StyledSearch className="container">
         <br />
         <br />
         <br />
         <StyledCardContainer>
-          <StyledCard variant="outlined">
+          <StyledCard variant="outlined" className="shadow">
             <StyledCardHeader title="Search for your next destination" />
             <div className="row p-2">
               <div className="col-md-4">
