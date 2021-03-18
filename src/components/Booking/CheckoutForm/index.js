@@ -15,7 +15,7 @@ export default function ChechoutForm() {
   };
 
   return (
-    <div className="container p-5">
+    <div className="container p-2">
       <form className="row g-3" onSubmit={handleSubmit(onSubmit)}>
         <div className="col-md-3">
           <label>Title</label>
