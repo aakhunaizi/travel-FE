@@ -18,6 +18,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         flights: action.payload,
       };
+    case types.GET_PASSENGER:
+      return {
+        ...state,
+        passengers: [...state.passengers, action.payload],
+      };
     default:
       return state;
   }

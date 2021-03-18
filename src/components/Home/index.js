@@ -167,18 +167,21 @@ const Home = () => {
                 />
               </div>
             </div>
-            <div className="row mt-2 p-2">
-              <StyledFaPlaneDeparture />
-              <ReactDatePicker
-                className="form-control p-2"
-                placeholderText="Select date"
-                onChange={(departureDate) => {
-                  setFlight({ ...flight, departureDate });
-                }}
-                selected={flight.departureDate}
-              />
+            <div className="row mt-2 p-2 d-flex justify-content-around">
+              <div className="col-md-6">
+                <StyledFaPlaneDeparture />
+                <ReactDatePicker
+                  className="form-control p-2 "
+                  placeholderText="Select date"
+                  onChange={(departureDate) => {
+                    setFlight({ ...flight, departureDate });
+                  }}
+                  selected={flight.departureDate}
+                  withPortal
+                />
+              </div>
               {flight.flightType.value === "roundtrip" && (
-                <>
+                <div className="col-md-6">
                   <StyledFaPlaneArrival />
                   <ReactDatePicker
                     className="form-control p-2"
@@ -187,8 +190,9 @@ const Home = () => {
                       setFlight({ ...flight, arrivalDate })
                     }
                     selected={flight.arrivalDate}
+                    withPortal
                   />
-                </>
+                </div>
               )}
             </div>
             <StyledCardActions>

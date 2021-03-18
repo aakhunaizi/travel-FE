@@ -45,19 +45,22 @@ export default function FlightListPage() {
           setSecondDate={setSecondDate}
         />
       </div>
-      {flightInfo.flightType.value === "roundtrip" ? (
+      {flightInfo.flightType.value === "roundtrip" && firstFlightId !== null ? (
+        <div className="row d-flex justify-content-md-center">
+          <StyledButton
+            className="btn btn-outline-success"
+            onClick={() => dispatch(fetchSecondFlights(flightInfo, secondDate))}
+            disabled={firstFlightId === null ? true : false}
+          >
+            Search
+          </StyledButton>
+        </div>
+      ) : (
+        ""
+      )}
+      {flightInfo.flightType.value === "roundtrip" &&
+      flightListOutbound.length !== 0 ? (
         <>
-          <div className="row d-flex justify-content-md-center">
-            <StyledButton
-              className="btn btn-outline-success"
-              onClick={() =>
-                dispatch(fetchSecondFlights(flightInfo, secondDate))
-              }
-              disabled={firstFlightId === null ? true : false}
-            >
-              Search
-            </StyledButton>
-          </div>
           <div className="row">
             <FlightList
               flightList={flightListOutbound}
@@ -72,8 +75,9 @@ export default function FlightListPage() {
       )}
       <div className="row d-flex justify-content-md-center">
         <StyledButton
-          className="btn btn-outline-success"
+          className="btn btn-outline-success m-5"
           onClick={handleGetIds}
+          data-mdb-ripple-color="dark"
         >
           Checkout
         </StyledButton>
