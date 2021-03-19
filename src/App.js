@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Helmet>
-        <title>Final Destination</title>
+        <title>Travel Go</title>
       </Helmet>
       <Navbar />
       <Routes />

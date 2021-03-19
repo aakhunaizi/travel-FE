@@ -98,6 +98,7 @@ export default function CreateFlight() {
                 Departure Date / Departure Time
               </DateLabel>
               <ReactDatePicker
+                withPortal
                 showTimeSelect
                 dateFormat="MMMM d, yyyy h:mm aa"
                 className="form-control p-3"
@@ -110,6 +111,7 @@ export default function CreateFlight() {
                 Arrival Date / Arrival Time
               </DateLabel>
               <ReactDatePicker
+                withPortal
                 showTimeSelect
                 dateFormat="MMMM d, yyyy h:mm aa"
                 className="form-control p-3"

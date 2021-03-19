@@ -9,7 +9,7 @@ export const Loading = styled.div`
 `;
 
 export const StyledTableContainer = styled(TableContainer)`
-  width: 80%;
+  width: 85%;
   margin-top: 5%;
   margin-bottom: 2%;
 `;

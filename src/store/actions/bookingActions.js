@@ -15,6 +15,7 @@ export const bookFlight = async (flightInfo, user, history) => {
       res = await instance.post("/booking", flightInfo);
     }
     toast.success("Booked Successfully");
+    toast.warning("Don't forget your PCR test!");
   } catch (error) {
     toast.error("Error While Booking");
   }
