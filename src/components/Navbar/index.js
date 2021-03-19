@@ -69,7 +69,7 @@ const Navbar = () => {
         <Toolbar>
           {user === null || user.role === "user" ? (
             <Typography variant="h6" className={classes.title}>
-              <LogoLink to="/">Final Destination ✈️</LogoLink>
+              <LogoLink to="/">Travel Go ✈️</LogoLink>
             </Typography>
           ) : (
             <Typography variant="h6" className={classes.title}>

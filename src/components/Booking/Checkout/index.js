@@ -46,7 +46,7 @@ export default function Checkout() {
 
   return (
     <div className="container mt-5">
-      <ToastContainer autoClose={2000} />
+      <ToastContainer autoClose={5000} />
       <ListGroup variant="flush" style={{ marginTop: "10%" }}>
         {Array.from({ length: passengers }, (_, index) => (
           <CheckoutList passengerNumber={index + 1} />

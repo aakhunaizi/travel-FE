@@ -3,7 +3,7 @@ import { Card, CardActions } from "@material-ui/core";
 import { Modal } from "react-bootstrap";
 
 export const StyledCard = styled(Card)`
-  width: 80%;
+  width: 85%;
   margin-top: 5%;
 `;
 
